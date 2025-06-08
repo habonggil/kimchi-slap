@@ -131,24 +131,7 @@
         .mb-4 { margin-bottom: 1rem; }
         .mb-6 { margin-bottom: 1.5rem; }
         .mt-4 { margin-top: 1rem; }
-        .btn-back {
-            background: #f3f4f6;
-            color: #4b5563;
-            border: 2px solid #e5e7eb;
-            padding: 0.5rem 1.5rem;
-            border-radius: 9999px;
-            font-size: 0.875rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-top: 1rem;
-        }
-        
-        .btn-back:hover {
-            background: #e5e7eb;
-            border-color: #d1d5db;
-            transform: scale(1.05);
-        }
+        .font-bold { font-weight: bold; }
         
         .target-grid {
             display: grid;
@@ -200,7 +183,7 @@
         }
         
         .philosopher-list {
-            max-height: 32rem;
+            max-height: 24rem;
             overflow-y: auto;
             margin-bottom: 1rem;
         }
@@ -409,9 +392,11 @@
         
         <div class="footer">
             <p>『침실에서 읽는 서양철학사』 × 김치싸다구</p>
-            <p class="mt-4" style="font-size: 1.25rem; font-weight: bold;">Made with 💕 by 하윤 & 감독님</p>
-            <p class="mt-4" style="font-size: 0.625rem; color: #9ca3af;">
-                Powered by GIPHY
+            <p class="mt-4">Made with 💕 by 하윤 & 감독님</p>
+            <p class="mt-4">
+                <img src="https://developers.giphy.com/branch/master/static/header-logo-0fec0225d189bc0eae27dac3e3770582.gif" 
+                     alt="Powered by GIPHY" 
+                     style="height: 20px; vertical-align: middle; opacity: 0.7;">
             </p>
         </div>
     </div>
@@ -433,53 +418,39 @@
             currentGifUrl: ''
         };
         
-        // 🔥 대량 업데이트된 싸다구 GIF URL - 더 많은 랜덤 재미!
+        // 🔥 수정된 GIF URL들 - 올바른 형식
         const SLAP_GIFS_BY_LEVEL = {
             // 레벨 1: 약한 싸다구 (살짝 때리기)
             1: [
-                'https://media.giphy.com/media/xT8qB7Sbwskk27Rdy8/giphy.gif',
-                'https://media.giphy.com/media/26vUKvewPK60uz9Dy/giphy.gif',
-                'https://media.giphy.com/media/gL9Yb3E4DuCc/giphy.gif',
-                'https://media.giphy.com/media/dUrwQ4E1oXfWLG1ud2/giphy.gif',
-                'https://media.giphy.com/media/UR7fqAcVmtmRwJuxkB/giphy.gif',
-                'https://media.giphy.com/media/O3ao5CGUL7FK0/giphy.gif',
-                'https://media.giphy.com/media/wmfeYOh5zJqtqj9esr/giphy.gif'
+                'https://media4.giphy.com/media/xT8qB7Sbwskk27Rdy8/giphy.gif',
+                'https://media1.giphy.com/media/l0HluN8PywCl6Hckg/giphy.gif',
+                'https://media.giphy.com/media/3XlEk2RxPS1m8/giphy.gif',
+                'https://media.giphy.com/media/uqSU9IEYEKAbS/giphy.gif',
+                'https://media.giphy.com/media/gSIz6gGLhguOY/giphy.gif'
             ],
             // 레벨 2: 중간 싸다구 (제대로 한 대)
             2: [
-                'https://media.giphy.com/media/lSZDrBZVHLy7yVITht/giphy.gif',
-                'https://media.giphy.com/media/K3ZjR6Dc22t9e/giphy.gif',
-                'https://media.giphy.com/media/deKWTyMOYLkje/giphy.gif',
-                'https://media.giphy.com/media/gSIz6gGLhguOY/giphy.gif',
-                'https://media.giphy.com/media/IAAXyr5GU73xK/giphy.gif',
-                'https://media.giphy.com/media/mwmABstBIAHte/giphy.gif',
-                'https://media.giphy.com/media/Qumf2QovTD4QxHPjy5/giphy.gif',
-                'https://media.giphy.com/media/pfGBhQSaYAO5y/giphy.gif',
-                'https://media.giphy.com/media/CXY0077rLFoCuSeKzc/giphy.gif',
-                'https://media.giphy.com/media/4FRPPbMkttjcFEDYbm/giphy.gif'
+                'https://media.giphy.com/media/Ql5voX2wAVUYw/giphy.gif',
+                'https://media.giphy.com/media/j3iGKfXRKlLqw/giphy.gif',
+                'https://media.giphy.com/media/xT0BKiwgIPGShJNi0g/giphy.gif',
+                'https://media.giphy.com/media/FjOsaw9z4BhrW/giphy.gif',
+                'https://media.giphy.com/media/l2YWxte7sJB2XuE8M/giphy.gif'
             ],
             // 레벨 3: 강한 싸다구 (날아가는 수준)
             3: [
-                'https://media.giphy.com/media/xT9Nvl9F0gFzyAHiwg/giphy.gif',
-                'https://media.giphy.com/media/12LjisUEAp8bx6/giphy.gif',
-                'https://media.giphy.com/media/3XlEk2RxPS1m8/giphy.gif',
                 'https://media.giphy.com/media/mEtSQlxqBtWWA/giphy.gif',
-                'https://media.giphy.com/media/l3q2SbaFGgMFO/giphy.gif',
-                'https://media.giphy.com/media/l4FGKYL37dnOyjkty/giphy.gif',
-                'https://media.giphy.com/media/MooYP55O0SVOM/giphy.gif',
-                'https://media.giphy.com/media/3o752gPI09ZLYk84Ok/giphy.gif',
-                'https://media.giphy.com/media/Du4a5UGZxuIOQ/giphy.gif'
+                'https://media.giphy.com/media/26xBENWdka2DSvvag/giphy.gif',
+                'https://media.giphy.com/media/3XlEk2RxPS1m8/giphy.gif',
+                'https://media.giphy.com/media/12LjisUEAp8bx6/giphy.gif',
+                'https://media.giphy.com/media/KUAb8YQOhmWNq/giphy.gif'
             ],
             // 레벨 4: 극한 싸다구 (연속/콤보)
             4: [
-                'https://media.giphy.com/media/9U5J7JpaYBr68/giphy.gif',
                 'https://media.giphy.com/media/uqSU9IEYEKAbS/giphy.gif',
-                'https://media.giphy.com/media/Qs0I2VdbIqNkk/giphy.gif',
-                'https://media.giphy.com/media/Okfq8dG2tnzTG/giphy.gif',
+                'https://media.giphy.com/media/MM0Jrc8BHKx3y/giphy.gif',
+                'https://media.giphy.com/media/pSauCNBp1DcOY/giphy.gif',
                 'https://media.giphy.com/media/bGnQmK38QoSg8/giphy.gif',
-                'https://media.giphy.com/media/26xBCZtVWO8q1R0k0/giphy.gif',
-                'https://media.giphy.com/media/RkLaH1ptACyAzQ1dWj/giphy.gif',
-                'https://media.giphy.com/media/YFHYllaX7wd5iK6i0G/giphy.gif'
+                'https://media.giphy.com/media/9U5J7JpaYBr68/giphy.gif'
             ]
         };
         
@@ -510,9 +481,8 @@
             ]
         };
         
-        // 철학자 데이터 (무료 5명 + 프리미엄 다수!)
+        // 철학자 데이터 (각 4단계 레벨)
         const philosophers = [
-            // ========== 무료 철학자 (5명) ==========
             {
                 id: 'socrates',
                 name: '소크라테스',
@@ -535,7 +505,7 @@
                         title: '중간맛 🌶️🌶️',
                         original: 'Γνῶθι σεαυτόν, ἠλίθιε!',
                         pronunciation: '그노티 세아우톤, 일리티에!',
-                        slap: '아니 못 알아들었어? 너 자신이 0청이란 걸 알라고!',
+                        slap: '아니 못 알아들었어? 너 자신이 멍청이란 걸 알라고!',
                         buttonText: '더 세게!',
                         teeth: 3
                     },
@@ -544,7 +514,7 @@
                         title: '매운맛 🌶️🌶️🌶️',
                         original: 'Γνῶθι σεαυτόν, μαλάκα!',
                         pronunciation: '그노티 세아우톤, 말라카!',
-                        slap: '좋은 말로 하니까 안 통하네! 너 자신이 X0신인 걸 알라!',
+                        slap: '좋은 말로 하니까 안 통하네! 너 자신이 좆병신인 걸 알라!',
                         buttonText: '진짜 빡세게!',
                         teeth: 5
                     },
@@ -590,7 +560,7 @@
                         title: '매운맛 🌶️🌶️🌶️',
                         original: 'Μένε στο σπήλαιό σου, γαμημένε!',
                         pronunciation: '메네 스토 스필라이오 수, 가미메네!',
-                        slap: '에라이 T발! 평생 동굴에서 X이나 빨고 있어라!',
+                        slap: '에라이 씨발! 평생 동굴에서 좆이나 빨고 있어라!',
                         buttonText: '진짜 빡세게!',
                         teeth: 5
                     },
@@ -627,7 +597,7 @@
                         title: '중간맛 🌶️🌶️',
                         original: 'Gott ist tot, und du bist dumm!',
                         pronunciation: '고트 이스트 토트, 운트 두 비스트 둠!',
-                        slap: '신은 죽었고, 너는 0청하다!',
+                        slap: '신은 죽었고, 너는 멍청하다!',
                         buttonText: '더 세게!',
                         teeth: 3
                     },
@@ -636,7 +606,7 @@
                         title: '매운맛 🌶️🌶️🌶️',
                         original: 'Gott ist tot, und du bist ein Arschloch!',
                         pronunciation: '고트 이스트 토트, 운트 두 비스트 아인 아르쉬로흐!',
-                        slap: 'T발 말 안 통하네! 신은 죽었고, 너는 X같은 놈이다!',
+                        slap: '씨발 말 안 통하네! 신은 죽었고, 너는 좆같은 놈이다!',
                         buttonText: '진짜 빡세게!',
                         teeth: 5
                     },
@@ -673,7 +643,7 @@
                         title: '중간맛 🌶️🌶️',
                         original: 'Οὐδὲν ἄγαν, ἠλίθιε!',
                         pronunciation: '우덴 아간, 일리티에!',
-                        slap: '과하지 말라고 했지, 0청아!',
+                        slap: '과하지 말라고 했지, 멍청아!',
                         buttonText: '더 세게!',
                         teeth: 3
                     },
@@ -682,7 +652,7 @@
                         title: '매운맛 🌶️🌶️🌶️',
                         original: 'Εἶ ἄκρως ἠλίθιος!',
                         pronunciation: '에이 아크로스 일리티오스!',
-                        slap: 'T발 중용도 모르냐? 너는 극도로 0청한 0신이다!',
+                        slap: '씨발 중용도 모르냐? 너는 극도로 멍청한 병신이다!',
                         buttonText: '진짜 빡세게!',
                         teeth: 5
                     },
@@ -728,7 +698,7 @@
                         title: '매운맛 🌶️🌶️🌶️',
                         original: 'Tu ne penses pas, donc tu n\'es qu\'une merde!',
                         pronunciation: '튀 느 팡스 파, 동크 튀 네 캉 메흐드!',
-                        slap: '좋은 말로 안 통하네! 너는 생각 안 하니까 그냥 ㄸ덩어리야!',
+                        slap: '좋은 말로 안 통하네! 너는 생각 안 하니까 그냥 똥덩어리야!',
                         buttonText: '진짜 빡세게!',
                         teeth: 5
                     },
@@ -743,7 +713,6 @@
                     }
                 ]
             },
-            // ========== 프리미엄 철학자 (대거 추가!) ==========
             {
                 id: 'diogenes',
                 name: '디오게네스',
@@ -752,7 +721,6 @@
                 language: '고대 그리스어',
                 free: false,
                 premium: true,
-                preview: 'Γαμώ! 네 면상에 똥을 싸질러주겠다!',
                 levels: [
                     {
                         level: 1,
@@ -777,7 +745,7 @@
                         title: '매운맛 🌶️🌶️🌶️',
                         original: 'Γαμώ το κεφάλι σου, μαλάκα!',
                         pronunciation: '가모 토 케팔리 수, 말라카!',
-                        slap: 'T발! 네 대가리를 X되게 만들어주겠다!',
+                        slap: '씨발! 네 대가리를 좆되게 만들어주겠다!',
                         buttonText: '진짜 빡세게!',
                         teeth: 5
                     },
@@ -800,7 +768,6 @@
                 language: '독일어',
                 free: false,
                 premium: true,
-                preview: '너는 모든 이성의 부정이다!',
                 levels: [
                     {
                         level: 1,
@@ -825,7 +792,7 @@
                         title: '매운맛 🌶️🌶️🌶️',
                         original: 'Der kategorische Imperativ befiehlt dir: Verpiss dich!',
                         pronunciation: '데어 카테고리셰 임페라티프 베필트 디어: 페어피스 디히!',
-                        slap: '말로 안 되네! 정언명령이 너에게 명한다: X져라!',
+                        slap: '말로 안 되네! 정언명령이 너에게 명한다: 꺼져라!',
                         buttonText: '진짜 빡세게!',
                         teeth: 5
                     },
@@ -839,191 +806,6 @@
                         teeth: '전체'
                     }
                 ]
-            },
-            // 서양 철학자 추가
-            {
-                id: 'sartre',
-                name: '사르트르',
-                emoji: '🚬',
-                quote: '타인은 지옥이다',
-                language: '프랑스어',
-                free: false,
-                premium: true,
-                preview: '네 존재 자체가 구토를 유발한다!'
-            },
-            {
-                id: 'schopenhauer',
-                name: '쇼펜하우어',
-                emoji: '😠',
-                quote: '인생은 고통이다',
-                language: '독일어',
-                free: false,
-                premium: true,
-                preview: '넌 내 염세주의마저 긍정적으로 만들 정도로 최악이다!'
-            },
-            {
-                id: 'marx',
-                name: '마르크스',
-                emoji: '☭',
-                quote: '만국의 프롤레타리아여 단결하라',
-                language: '독일어',
-                free: false,
-                premium: true,
-                preview: '부르주아 X새끼!'
-            },
-            {
-                id: 'freud',
-                name: '프로이트',
-                emoji: '🧠',
-                quote: '무의식이 모든 것을 지배한다',
-                language: '독일어',
-                free: false,
-                premium: true,
-                preview: '네 리비도가 X같은 방향으로 고착됐구나!'
-            },
-            // 역사적 인물
-            {
-                id: 'napoleon',
-                name: '나폴레옹',
-                emoji: '🎖️',
-                quote: '내 사전에 불가능은 없다',
-                language: '프랑스어',
-                free: false,
-                premium: true,
-                preview: '내 사전에 불가능은 없지만 넌 예외다!'
-            },
-            {
-                id: 'churchill',
-                name: '처칠',
-                emoji: '🎩',
-                quote: 'Never give up',
-                language: '영어',
-                free: false,
-                premium: true,
-                preview: 'Never, never, never... 넌 영원히 X이다!'
-            },
-            {
-                id: 'gandhi',
-                name: '간디',
-                emoji: '🕊️',
-                quote: '비폭력 불복종',
-                language: '힌디어',
-                free: false,
-                premium: true,
-                preview: '비폭력주의지만 네 X은 예외다!'
-            },
-            // 과학자
-            {
-                id: 'einstein',
-                name: '아인슈타인',
-                emoji: '🧪',
-                quote: 'E=mc²',
-                language: '독일어',
-                free: false,
-                premium: true,
-                preview: 'E=mc²이고 넌 X²이다!'
-            },
-            {
-                id: 'newton',
-                name: '뉴턴',
-                emoji: '🍎',
-                quote: '만유인력의 법칙',
-                language: '영어',
-                free: false,
-                premium: true,
-                preview: '만유인력도 널 밀어낸다!'
-            },
-            {
-                id: 'darwin',
-                name: '다윈',
-                emoji: '🐒',
-                quote: '진화론',
-                language: '영어',
-                free: false,
-                premium: true,
-                preview: '진화론적으로 넌 퇴화다!'
-            },
-            // 예술가
-            {
-                id: 'vangogh',
-                name: '반 고흐',
-                emoji: '🎨',
-                quote: '별이 빛나는 밤',
-                language: '네덜란드어',
-                free: false,
-                premium: true,
-                preview: '내 귀를 자른 건 네 X소리 때문!'
-            },
-            {
-                id: 'picasso',
-                name: '피카소',
-                emoji: '🖼️',
-                quote: '게르니카',
-                language: '스페인어',
-                free: false,
-                premium: true,
-                preview: '네 얼굴은 입체파도 포기했다!'
-            },
-            // K-레전드
-            {
-                id: 'wonhyo',
-                name: '원효대사',
-                emoji: '🙏',
-                quote: '일체유심조',
-                language: '한문',
-                free: false,
-                premium: true,
-                preview: '해골물도 네 X같은 마음보단 깨끗하다!'
-            },
-            {
-                id: 'kimsatgat',
-                name: '김삿갓',
-                emoji: '👲',
-                quote: '조선 최고 디스 래퍼',
-                language: '한글',
-                free: false,
-                premium: true,
-                preview: '네 면상은 X갓도 못 가린다!'
-            },
-            {
-                id: 'hwangjini',
-                name: '황진이',
-                emoji: '💃',
-                quote: '청산리 벽계수야',
-                language: '한글',
-                free: false,
-                premium: true,
-                preview: '네 X은 벽계수도 씻어줄 수 없구나!'
-            },
-            {
-                id: 'sejong',
-                name: '세종대왕',
-                emoji: '👑',
-                quote: '한글 창제',
-                language: '한글',
-                free: false,
-                premium: true,
-                preview: '한글로도 표현 안 되는 X새끼!'
-            },
-            {
-                id: 'yisunsin',
-                name: '이순신',
-                emoji: '⛵',
-                quote: '필사즉생 필생즉사',
-                language: '한글',
-                free: false,
-                premium: true,
-                preview: '12척으로도 못 이기는 X같은 놈!'
-            },
-            {
-                id: 'toegye',
-                name: '퇴계 이황',
-                emoji: '📖',
-                quote: '성리학 대가',
-                language: '한문',
-                free: false,
-                premium: true,
-                preview: '理도 氣도 없는 X0X아!'
             }
         ];
         
@@ -1071,10 +853,10 @@
                     <h2 class="text-2xl mb-4"><b>스트레스를 철학으로<br>날려버리세요!</b></h2>
                     <p class="text-gray mb-6">위대한 철학자들이<br>당신을 대신해 점점 더 세게 김치싸다구를!</p>
                     
-                    <div class="mb-4" style="height: 200px; overflow: hidden; border-radius: 0.5rem; background: #f3f4f6; display: flex; align-items: center; justify-content: center;">
-                        <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3BubzV4ajNmcmlnbWdmaHV6ZDV2OW82cmxwMTIxbm93Z2w4a25kciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/hgMUFsEv5sJ0kre11B/giphy.gif" 
+                    <div class="mb-4" style="height: 150px; overflow: hidden; border-radius: 0.5rem; background: #f3f4f6; display: flex; align-items: center; justify-content: center;">
+                        <img src="https://media.giphy.com/media/xT0BKiwgIPGShJNi0g/giphy.gif" 
                              alt="김치싸다구 미리보기" 
-                             style="width: 100%; height: auto; opacity: 0.9;">
+                             style="width: 100%; height: auto; opacity: 0.8;">
                     </div>
                     
                     <button class="btn" onclick="changeStep('target')">시작하기</button>
@@ -1133,7 +915,7 @@
                             </button>
                         `).join('')}
                     </div>
-                    <button class="btn-back" onclick="changeStep('target')">← 다시 선택</button>
+                    <button class="text-sm text-gray" onclick="changeStep('target')">← 다시 선택</button>
                 </div>
             `;
         }
@@ -1155,16 +937,15 @@
                                         ${!phil.free ? '<span class="premium-badge">PREMIUM</span>' : ''}
                                     </div>
                                     <div class="quote">"${phil.quote}"</div>
-                                    ${phil.preview ? `<div style="font-size: 0.75rem; color: #dc2626; margin-top: 0.25rem; font-style: italic;">"${phil.preview}"</div>` : ''}
                                     <div style="font-size: 0.75rem; color: #9ca3af; margin-top: 0.25rem;">
-                                        ${phil.language} ${phil.levels ? '| 4단계 빡침 시스템' : '| Coming Soon!'}
+                                        ${phil.language} | 4단계 빡침 시스템
                                     </div>
                                 </div>
                             </button>
                         `).join('')}
                     </div>
                     
-                    <button class="btn-back" onclick="changeStep('character')">← 다시 선택</button>
+                    <button class="text-sm text-gray" onclick="changeStep('character')">← 다시 선택</button>
                 </div>
             `;
         }
@@ -1251,7 +1032,7 @@
                                 </button>
                             </div>
                             
-                            <button class="btn-back" onclick="resetApp()">처음으로</button>
+                            <button class="mt-4 text-sm text-gray" onclick="resetApp()">처음으로</button>
                         </div>
                     `}
                     
@@ -1405,8 +1186,7 @@ ${state.shareLink}
                 state.currentSlapLevel = 0; // 레벨 초기화
                 changeStep('slap');
             } else {
-                const preview = phil.preview ? `\n\n미리보기: "${phil.preview}"` : '';
-                alert(`💎 프리미엄 철학자입니다! 💎\n\n${phil.name}의 진짜 욕이 궁금하시죠?${preview}\n\n곧 오픈 예정! 더 많은 철학자의 김치싸다구를 기대해주세요!`);
+                alert('프리미엄 철학자입니다! 🌟\n\n곧 오픈 예정!');
             }
         }
         
