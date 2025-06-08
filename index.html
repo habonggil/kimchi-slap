@@ -133,25 +133,6 @@
         .mt-4 { margin-top: 1rem; }
         .font-bold { font-weight: bold; }
         
-        .btn-back {
-            background: #f3f4f6;
-            color: #4b5563;
-            border: 2px solid #e5e7eb;
-            padding: 0.5rem 1.5rem;
-            border-radius: 9999px;
-            font-size: 0.875rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-top: 1rem;
-        }
-        
-        .btn-back:hover {
-            background: #e5e7eb;
-            border-color: #d1d5db;
-            transform: scale(1.05);
-        }
-        
         .target-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -202,7 +183,7 @@
         }
         
         .philosopher-list {
-            max-height: 32rem;
+            max-height: 24rem;
             overflow-y: auto;
             margin-bottom: 1rem;
         }
@@ -285,6 +266,24 @@
             font-size: 1.5rem;
             color: #dc2626;
             font-weight: bold;
+        }
+        
+        .target-response-box {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: #fef3c7;
+            border-radius: 0.5rem;
+            border: 2px solid #fbbf24;
+        }
+        
+        .region-badge {
+            display: inline-block;
+            background: #e5e7eb;
+            color: #4b5563;
+            padding: 0.125rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
         }
         
         .modal {
@@ -411,15 +410,7 @@
         
         <div class="footer">
             <p>『침실에서 읽는 서양철학사』 × 김치싸다구</p>
-            <p class="mt-4" style="font-size: 1.25rem; font-weight: bold;">Made with 💕 by K-Spirit Group</p>
-            <p class="mt-4">
-                <a href="https://hits.seeyoufarm.com">
-                    <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fhabonggil.github.io%2Fkimchi-slap&count_bg=%23DC2626&title_bg=%23555555&icon=fire&icon_color=%23E7E7E7&title=방문자&edge_flat=false"/>
-                </a>
-            </p>
-            <p class="mt-4" style="font-size: 0.625rem; color: #9ca3af;">
-                Powered by GIPHY
-            </p>
+            <p class="mt-4">Made with 💕 by 하윤 & 감독님</p>
         </div>
     </div>
     
@@ -440,56 +431,35 @@
             currentGifUrl: ''
         };
         
-        // 전역 슬랩 카운트
-        let globalSlapCount = 12345;
-        
-        // 🔥 대량 업데이트된 싸다구 GIF URL - 더 많은 랜덤 재미!
+        // 수정된 GIF URL
         const SLAP_GIFS_BY_LEVEL = {
-            // 레벨 1: 약한 싸다구 (살짝 때리기)
             1: [
                 'https://media.giphy.com/media/xT8qB7Sbwskk27Rdy8/giphy.gif',
+                'https://media.giphy.com/media/mwmABstBIAHte/giphy.gif',
                 'https://media.giphy.com/media/26vUKvewPK60uz9Dy/giphy.gif',
                 'https://media.giphy.com/media/gL9Yb3E4DuCc/giphy.gif',
-                'https://media.giphy.com/media/dUrwQ4E1oXfWLG1ud2/giphy.gif',
-                'https://media.giphy.com/media/UR7fqAcVmtmRwJuxkB/giphy.gif',
-                'https://media.giphy.com/media/O3ao5CGUL7FK0/giphy.gif',
-                'https://media.giphy.com/media/wmfeYOh5zJqtqj9esr/giphy.gif'
+                'https://media.giphy.com/media/dUrwQ4E1oXfWLG1ud2/giphy.gif'
             ],
-            // 레벨 2: 중간 싸다구 (제대로 한 대)
             2: [
                 'https://media.giphy.com/media/lSZDrBZVHLy7yVITht/giphy.gif',
                 'https://media.giphy.com/media/K3ZjR6Dc22t9e/giphy.gif',
                 'https://media.giphy.com/media/deKWTyMOYLkje/giphy.gif',
                 'https://media.giphy.com/media/gSIz6gGLhguOY/giphy.gif',
-                'https://media.giphy.com/media/IAAXyr5GU73xK/giphy.gif',
-                'https://media.giphy.com/media/mwmABstBIAHte/giphy.gif',
-                'https://media.giphy.com/media/Qumf2QovTD4QxHPjy5/giphy.gif',
-                'https://media.giphy.com/media/pfGBhQSaYAO5y/giphy.gif',
-                'https://media.giphy.com/media/CXY0077rLFoCuSeKzc/giphy.gif',
-                'https://media.giphy.com/media/4FRPPbMkttjcFEDYbm/giphy.gif'
+                'https://media.giphy.com/media/IAAXyr5GU73xK/giphy.gif'
             ],
-            // 레벨 3: 강한 싸다구 (날아가는 수준)
             3: [
                 'https://media.giphy.com/media/xT9Nvl9F0gFzyAHiwg/giphy.gif',
                 'https://media.giphy.com/media/12LjisUEAp8bx6/giphy.gif',
                 'https://media.giphy.com/media/3XlEk2RxPS1m8/giphy.gif',
-                'https://media.giphy.com/media/mEtSQlxqBtWWA/giphy.gif',
-                'https://media.giphy.com/media/l3q2SbaFGgMFO/giphy.gif',
-                'https://media.giphy.com/media/l4FGKYL37dnOyjkty/giphy.gif',
-                'https://media.giphy.com/media/MooYP55O0SVOM/giphy.gif',
-                'https://media.giphy.com/media/3o752gPI09ZLYk84Ok/giphy.gif',
-                'https://media.giphy.com/media/Du4a5UGZxuIOQ/giphy.gif'
+                'https://media.giphy.com/media/l41YkEYrcqrPOpuIE/giphy.gif',
+                'https://media.giphy.com/media/mEtSQlxqBtWWA/giphy.gif'
             ],
-            // 레벨 4: 극한 싸다구 (연속/콤보)
             4: [
                 'https://media.giphy.com/media/9U5J7JpaYBr68/giphy.gif',
                 'https://media.giphy.com/media/uqSU9IEYEKAbS/giphy.gif',
                 'https://media.giphy.com/media/Qs0I2VdbIqNkk/giphy.gif',
-                'https://media.giphy.com/media/Okfq8dG2tnzTG/giphy.gif',
-                'https://media.giphy.com/media/bGnQmK38QoSg8/giphy.gif',
-                'https://media.giphy.com/media/26xBCZtVWO8q1R0k0/giphy.gif',
-                'https://media.giphy.com/media/RkLaH1ptACyAzQ1dWj/giphy.gif',
-                'https://media.giphy.com/media/YFHYllaX7wd5iK6i0G/giphy.gif'
+                'https://media.giphy.com/media/mwmABstBIAHte/giphy.gif',
+                'https://media.giphy.com/media/bGnQmK38QoSg8/giphy.gif'
             ]
         };
         
@@ -501,28 +471,136 @@
             friend: { name: '친구', emoji: '👥' }
         };
         
-        // 캐릭터 프리셋
+        // 캐릭터 프리셋 with 지역 정보
         const characters = {
             boss: [
-                { id: 'boss40m', name: '40대 김부장', face: '😠', features: ['배나옴', '대머리', '넥타이'] },
-                { id: 'boss50m', name: '50대 박상무', face: '😤', features: ['흰머리', '안경', '권위적'] },
-                { id: 'boss30f', name: '30대 최팀장', face: '😒', features: ['칼단발', '차가움', '독설가'] }
+                { 
+                    id: 'boss40m', 
+                    name: '40대 김부장', 
+                    face: '😠', 
+                    features: ['배나옴', '대머리', '넥타이'],
+                    region: '경상도',
+                    style: '경상도 욕쟁이'
+                },
+                { 
+                    id: 'boss50m', 
+                    name: '50대 박상무', 
+                    face: '😤', 
+                    features: ['흰머리', '안경', '권위적'],
+                    region: '전라도',
+                    style: '전라도 어르신'
+                },
+                { 
+                    id: 'boss30f', 
+                    name: '30대 최팀장', 
+                    face: '😒', 
+                    features: ['칼단발', '차가움', '독설가'],
+                    region: '서울/경기',
+                    style: 'MZ세대 독설'
+                }
             ],
             professor: [
-                { id: 'prof50m', name: '50대 꼰대교수', face: '🧐', features: ['안경', '수염', '권위적'] },
-                { id: 'prof60m', name: '60대 노교수', face: '👴', features: ['흰머리', '고집', '보수적'] }
+                { 
+                    id: 'prof50m', 
+                    name: '50대 꼰대교수', 
+                    face: '🧐', 
+                    features: ['안경', '수염', '권위적'],
+                    region: '충청도',
+                    style: '충청도 느긋한 욕'
+                },
+                { 
+                    id: 'prof60m', 
+                    name: '60대 노교수', 
+                    face: '👴', 
+                    features: ['흰머리', '고집', '보수적'],
+                    region: '강원도',
+                    style: '강원도 투박한 욕'
+                }
             ],
             politician: [
-                { id: 'pol50m', name: '50대 정치인', face: '🤥', features: ['가발', '뻔뻔함', '양복'] }
+                { 
+                    id: 'pol50m', 
+                    name: '50대 정치인', 
+                    face: '🤥', 
+                    features: ['가발', '뻔뻔함', '양복'],
+                    region: '전라도',
+                    style: '전라도 판소리'
+                }
             ],
             friend: [
-                { id: 'friend20m', name: '20대 MZ후배', face: '😏', features: ['건방짐', '무례함', 'FM'] }
+                { 
+                    id: 'friend20m', 
+                    name: '20대 MZ후배', 
+                    face: '😏', 
+                    features: ['건방짐', '무례함', 'FM'],
+                    region: 'MZ세대',
+                    style: '인터넷 슬랭'
+                }
             ]
         };
         
-        // 철학자 데이터 (무료 5명 + 프리미엄 다수!)
+        // 타겟별 반응 (지역 사투리)
+        const characterResponses = {
+            boss30f: { // 30대 최팀장 - 서울/경기 MZ세대
+                responses: [
+                    "어? 진짜 개빡치네?",
+                    "아 ㅈㄴ 짜증나! 니가 뭔데?",
+                    "와 진짜 레전드다 너... 최악이야",
+                    "아 진심 극혐! 토 나와!"
+                ]
+            },
+            boss40m: { // 40대 김부장 - 경상도
+                responses: [
+                    "와이라노! 니가 뭔데!",
+                    "아이다 이기! 가가 호로자슥이가!",
+                    "마! 니 대가리에 뭐가 들었노!",
+                    "아따 이 새끼가 환장하겄네!"
+                ]
+            },
+            boss50m: { // 50대 박상무 - 전라도
+                responses: [
+                    "아따 이 육시럴놈이!",
+                    "거시기 뭐시여, 니가 감히!",
+                    "와 씨부럴! 호로자슥 같은 놈!",
+                    "천하에 몹쓸 놈이구만!"
+                ]
+            },
+            prof50m: { // 50대 교수 - 충청도
+                responses: [
+                    "아니 그려~ 이 사람이 왜 이러셔~",
+                    "거 참... 사람이 그러면 쓰겄나?",
+                    "아이고~ 머리가 텅 비었구먼~",
+                    "쯧쯧... 조상님이 한탄하시겄네~"
+                ]
+            },
+            prof60m: { // 60대 교수 - 강원도
+                responses: [
+                    "아이고 이 베라먹을 놈!",
+                    "뭐이 이런 호랭이 물어갈 놈이!",
+                    "감자 대가리 같은 놈이구만!",
+                    "산신령도 포기한 놈이야!"
+                ]
+            },
+            pol50m: { // 50대 정치인 - 전라도
+                responses: [
+                    "어화! 이놈이 제정신이 아니구만!",
+                    "아따! 천하의 잡놈이여!",
+                    "거시기 뭐시여, 삼대가 멸족할 놈!",
+                    "하늘도 땅도 버린 육시럴놈!"
+                ]
+            },
+            friend20m: { // 20대 MZ친구
+                responses: [
+                    "ㅋㅋㅋㅋ 뭐임? 개웃기네",
+                    "아 ㅅㅂ 진짜 빡치네;;",
+                    "와... 이건 좀 에바참치인듯",
+                    "ㄹㅇ 개극혐;; 토나와"
+                ]
+            }
+        };
+        
+        // 철학자 데이터 (동일하게 유지)
         const philosophers = [
-            // ========== 무료 철학자 (5명) ==========
             {
                 id: 'socrates',
                 name: '소크라테스',
@@ -537,33 +615,37 @@
                         original: 'Γνῶθι σεαυτόν',
                         pronunciation: '그노티 세아우톤',
                         slap: '너 자신을 알라',
+                        korean: '니 주제를 알어, 이 양반아!',
                         buttonText: '김치싸다구!',
                         teeth: 1
                     },
                     {
                         level: 2,
                         title: '중간맛 🌶️🌶️',
-                        original: 'Γνῶθι σεαυτόν, ἠλίθιε!',
-                        pronunciation: '그노티 세아우톤, 일리티에!',
-                        slap: '아니 못 알아들었어? 너 자신이 0청이란 걸 알라고!',
+                        original: 'Οὐδὲν οἶδα, ἀλλὰ σὺ οὐδὲ τοῦτο!',
+                        pronunciation: '우덴 오이다, 알라 시 우데 투토!',
+                        slap: '나는 모른다는 걸 아는데, 너는 그것조차 모른다!',
+                        korean: '어허 이놈아! 나는 모른다는 걸 알제만, 니는 호로자슥이라는 것도 모르는 육시럴놈이구만!',
                         buttonText: '더 세게!',
                         teeth: 3
                     },
                     {
                         level: 3,
                         title: '매운맛 🌶️🌶️🌶️',
-                        original: 'Γνῶθι σεαυτόν, μαλάκα!',
-                        pronunciation: '그노티 세아우톤, 말라카!',
-                        slap: '좋은 말로 하니까 안 통하네! 너 자신이 X0신인 걸 알라!',
+                        original: 'Βίος ἀνεξέταστος οὐ βιωτὸς ἀνθρώπῳ, μαλάκα!',
+                        pronunciation: '비오스 아넥세타스토스 우 비오토스 안트로포, 말라카!',
+                        slap: '성찰 없는 삶은 살 가치가 없다, 이 멍청이야!',
+                        korean: '거시기 뭐시여, 생각 없이 사는 니 인생은 개보다 못한 거시기여! 썩은 동태 눈깔 같은 놈!',
                         buttonText: '진짜 빡세게!',
                         teeth: 5
                     },
                     {
                         level: 4,
                         title: '극한맛 🔥',
-                        original: 'Γαμώ το κεφάλι σου, μαλάκα!',
-                        pronunciation: '가모 토 케팔리 수, 말라카!',
-                        slap: 'Γαμώ! 이 씨발놈아! 네 대가리를 좆되게 만들어주겠다!',
+                        original: 'Τὸ κώνειον ἡδύτερον τῆς συνουσίας μετὰ σοῦ!',
+                        pronunciation: '토 코네이온 헤뒤테론 테스 시누시아스 메타 수!',
+                        slap: '독배가 너와의 대화보다 달콤하다!',
+                        korean: '아따 미친새끼! 독약 마시고 죽는 게 니랑 말 섞는 것보다 낫겄네! 천하에 몹쓸 놈!',
                         buttonText: '죽을만큼 때려!',
                         teeth: '전체'
                     }
@@ -583,33 +665,37 @@
                         original: 'Ἔξελθε ἐκ τοῦ σπηλαίου',
                         pronunciation: '엑셀테 에크 투 스펠라이우',
                         slap: '동굴에서 나와라',
+                        korean: '동굴에서 나오그라, 이 답답한 놈아!',
                         buttonText: '김치싸다구!',
                         teeth: 1
                     },
                     {
                         level: 2,
                         title: '중간맛 🌶️🌶️',
-                        original: 'Τί κάθεσαι στο σπήλαιο;',
-                        pronunciation: '티 카테사이 스토 스필라이오?',
-                        slap: '뭐하냐고 동굴에 처박혀서? 나와!',
+                        original: 'Σκιὰς μόνον βλέπεις, ἠλίθιε!',
+                        pronunciation: '스키아스 모논 블레페이스, 일리티에!',
+                        slap: '너는 그림자만 보고 있다, 바보야!',
+                        korean: '어허 이놈! 그림자만 보고 지랄하는 호랑이 담배 피던 시절 놈이구만!',
                         buttonText: '더 세게!',
                         teeth: 3
                     },
                     {
                         level: 3,
                         title: '매운맛 🌶️🌶️🌶️',
-                        original: 'Μένε στο σπήλαιό σου, γαμημένε!',
-                        pronunciation: '메네 스토 스필라이오 수, 가미메네!',
-                        slap: '에라이 T발! 평생 동굴에서 X이나 빨고 있어라!',
+                        original: 'Ἡ ἰδέα σου ἐστὶ κόπρος!',
+                        pronunciation: '헤 이데아 수 에스티 코프로스!',
+                        slap: '네 이데아는 똥이다!',
+                        korean: '니가 생각하는 진리? 그거 말똥구리가 굴리는 똥덩어리여! 개잡놈의 새끼!',
                         buttonText: '진짜 빡세게!',
                         teeth: 5
                     },
                     {
                         level: 4,
                         title: '극한맛 🔥',
-                        original: 'Πνίξου στο σκοτάδι, μαλάκα!',
-                        pronunciation: '프닉수 스토 스코타디, 말라카!',
-                        slap: '어둠 속에서 질식해 뒤져라, 이 좆같은 새끼야!',
+                        original: 'Ἐν τῷ κόσμῳ τῶν ἰδεῶν, οὐκ ὑπάρχεις!',
+                        pronunciation: '엔 토 코스모 톤 이데온, 우크 휘파르케이스!',
+                        slap: '이데아의 세계에 너는 존재하지 않는다!',
+                        korean: '이 육시럴 놈아! 완벽한 세계에는 니 같은 쌍놈은 있을 자리가 없당께! 삼대가 멸족할 놈!',
                         buttonText: '죽을만큼 때려!',
                         teeth: '전체'
                     }
@@ -629,33 +715,37 @@
                         original: 'Gott ist tot',
                         pronunciation: '고트 이스트 토트',
                         slap: '신은 죽었다',
+                        korean: '신은 죽었당께, 이 양반아!',
                         buttonText: '김치싸다구!',
                         teeth: 1
                     },
                     {
                         level: 2,
                         title: '중간맛 🌶️🌶️',
-                        original: 'Gott ist tot, und du bist dumm!',
-                        pronunciation: '고트 이스트 토트, 운트 두 비스트 둠!',
-                        slap: '신은 죽었고, 너는 0청하다!',
+                        original: 'Du bist der letzte Mensch!',
+                        pronunciation: '두 비스트 데어 레츠테 멘쉬!',
+                        slap: '너는 마지막 인간이다!',
+                        korean: '니는 말세놈이여! 판소리로 치면 "어화 이놈아, 니가 바로 세상 망치는 마지막 호로새끼구만!"',
                         buttonText: '더 세게!',
                         teeth: 3
                     },
                     {
                         level: 3,
                         title: '매운맛 🌶️🌶️🌶️',
-                        original: 'Gott ist tot, und du bist ein Arschloch!',
-                        pronunciation: '고트 이스트 토트, 운트 두 비스트 아인 아르쉬로흐!',
-                        slap: 'T발 말 안 통하네! 신은 죽었고, 너는 X같은 놈이다!',
+                        original: 'Ewige Wiederkunft deiner Dummheit!',
+                        pronunciation: '에비게 비더쿤프트 다이너 둠하이트!',
+                        slap: '네 멍청함의 영원회귀!',
+                        korean: '아따 거시기! 니 멍청함은 영원히 돌고 돌아 후손대대로 이어지겄네! 조상님이 통곡하실 놈!',
                         buttonText: '진짜 빡세게!',
                         teeth: 5
                     },
                     {
                         level: 4,
                         title: '극한맛 🔥',
-                        original: 'Du bist das größte Arschloch der Welt!',
-                        pronunciation: '두 비스트 다스 그뢰스테 아르쉬로흐 데어 벨트!',
-                        slap: '너는 세상에서 가장 좆같은 씨발새끼다!',
+                        original: 'Der Übermensch würde dich zertreten!',
+                        pronunciation: '데어 위버멘쉬 뷔르데 디히 체어트레텐!',
+                        slap: '초인이 너를 짓밟을 것이다!',
+                        korean: '초인? 아니여! 동네 개도 니를 무시하고 오줌 갈길 놈이여! 이 천하의 잡놈아!',
                         buttonText: '죽을만큼 때려!',
                         teeth: '전체'
                     }
@@ -675,6 +765,7 @@
                         original: 'Μέσον ἄριστον',
                         pronunciation: '메손 아리스톤',
                         slap: '중용이 최고다',
+                        korean: '중간이 최고여, 이 양반아!',
                         buttonText: '김치싸다구!',
                         teeth: 1
                     },
@@ -683,7 +774,8 @@
                         title: '중간맛 🌶️🌶️',
                         original: 'Οὐδὲν ἄγαν, ἠλίθιε!',
                         pronunciation: '우덴 아간, 일리티에!',
-                        slap: '과하지 말라고 했지, 0청아!',
+                        slap: '과하지 말라고 했지, 멍청아!',
+                        korean: '아따! 뭐든 적당히 하라니께! 니는 뭐든 과해서 탈이여!',
                         buttonText: '더 세게!',
                         teeth: 3
                     },
@@ -692,7 +784,8 @@
                         title: '매운맛 🌶️🌶️🌶️',
                         original: 'Εἶ ἄκρως ἠλίθιος!',
                         pronunciation: '에이 아크로스 일리티오스!',
-                        slap: 'T발 중용도 모르냐? 너는 극도로 0청한 0신이다!',
+                        slap: '너는 극도로 멍청하다!',
+                        korean: '거시기 뭐시여! 니는 중용은 개뿔, 극도로 멍청한 육시럴놈이여!',
                         buttonText: '진짜 빡세게!',
                         teeth: 5
                     },
@@ -701,7 +794,8 @@
                         title: '극한맛 🔥',
                         original: 'Ἄκρον κακόν, γαμώ!',
                         pronunciation: '아크론 카콘, 가모!',
-                        slap: '극단적인 병신새끼! 네 존재 자체가 중용의 반대다!',
+                        slap: '극단적인 악이다!',
+                        korean: '와 씨부럴! 니 존재 자체가 중용의 반대여! 하늘도 땅도 버린 극악무도한 놈!',
                         buttonText: '죽을만큼 때려!',
                         teeth: '전체'
                     }
@@ -721,6 +815,7 @@
                         original: 'Je pense, donc je suis',
                         pronunciation: '주 팡스, 동크 주 쉬',
                         slap: '나는 생각한다, 고로 존재한다',
+                        korean: '생각해야 존재한다고, 이 양반아!',
                         buttonText: '김치싸다구!',
                         teeth: 1
                     },
@@ -730,6 +825,7 @@
                         original: 'Tu ne penses pas!',
                         pronunciation: '튀 느 팡스 파!',
                         slap: '너는 생각을 안 하잖아!',
+                        korean: '아따 이놈아! 니는 생각을 안 하니께 존재도 안 하는 거시기여!',
                         buttonText: '더 세게!',
                         teeth: 3
                     },
@@ -738,7 +834,8 @@
                         title: '매운맛 🌶️🌶️🌶️',
                         original: 'Tu ne penses pas, donc tu n\'es qu\'une merde!',
                         pronunciation: '튀 느 팡스 파, 동크 튀 네 캉 메흐드!',
-                        slap: '좋은 말로 안 통하네! 너는 생각 안 하니까 그냥 ㄸ덩어리야!',
+                        slap: '너는 생각 안 하니까 그냥 똥덩어리야!',
+                        korean: '어허! 생각도 안 하는 놈은 말똥구리가 굴리는 똥만도 못한 거시기여!',
                         buttonText: '진짜 빡세게!',
                         teeth: 5
                     },
@@ -747,22 +844,20 @@
                         title: '극한맛 🔥',
                         original: 'Putain de merde sans cerveau!',
                         pronunciation: '퓌탱 드 메흐드 상 세르보!',
-                        slap: '씨발 뇌 없는 똥덩어리 새끼!',
+                        slap: '뇌 없는 똥덩어리 새끼!',
+                        korean: '와 씨부럴! 뇌가 없으니께 생각도 못하고 존재도 못하는 육시럴놈! 파리 목숨만도 못해!',
                         buttonText: '죽을만큼 때려!',
                         teeth: '전체'
                     }
                 ]
             },
-            // ========== 프리미엄 철학자 (대거 추가!) ==========
             {
                 id: 'diogenes',
                 name: '디오게네스',
                 emoji: '🧙‍♂️',
-                quote: 'Γαμώ!',
+                quote: '끄지라 이 씨부럴넘아!',
                 language: '고대 그리스어',
-                free: false,
-                premium: true,
-                preview: 'Γαμώ! 네 면상에 똥을 싸질러주겠다!',
+                free: true,
                 levels: [
                     {
                         level: 1,
@@ -770,33 +865,37 @@
                         original: 'Παραμέρα!',
                         pronunciation: '파라메라!',
                         slap: '비켜!',
+                        korean: '끄지라, 이 씨부럴넘아!',
                         buttonText: '김치싸다구!',
                         teeth: 1
                     },
                     {
                         level: 2,
                         title: '중간맛 🌶️🌶️',
-                        original: 'Φύγε από τον ήλιό μου!',
-                        pronunciation: '피게 아포 톤 일리오 무!',
-                        slap: '내 햇빛 가리지 말고 꺼져!',
+                        original: 'Φύγε από τον ήλιό μου, κύων!',
+                        pronunciation: '피게 아포 톤 일리오 무, 퀴온!',
+                        slap: '내 햇빛에서 꺼져, 개새끼야!',
+                        korean: '아따 이 호로새끼야! 해 가리지 말고 당장 끄져부러! 니가 뭔디 내 햇빛을 가려!',
                         buttonText: '더 세게!',
                         teeth: 3
                     },
                     {
                         level: 3,
                         title: '매운맛 🌶️🌶️🌶️',
-                        original: 'Γαμώ το κεφάλι σου, μαλάκα!',
-                        pronunciation: '가모 토 케팔리 수, 말라카!',
-                        slap: 'T발! 네 대가리를 X되게 만들어주겠다!',
+                        original: 'Γαμώ! Εἶ χείρων κυνός!',
+                        pronunciation: '가모! 에이 케이론 퀴노스!',
+                        slap: 'Γαμώ! 너는 개보다 못하다!',
+                        korean: '씨부럴! 개새끼들도 니보다는 낫겄다! 개는 정직하기라도 하제, 니는 뭐냐 이 육시럴놈아!',
                         buttonText: '진짜 빡세게!',
                         teeth: 5
                     },
                     {
                         level: 4,
                         title: '극한맛 🔥',
-                        original: 'Γαμώ! Σκατά στα μούτρα σου!',
-                        pronunciation: '가모! 스카타 스타 무트라 수!',
-                        slap: 'Γαμώ! 네 면상에 똥을 싸질러주겠다!',
+                        original: 'Γαμώ! Ἀλέξανδρος > σύ × ∞',
+                        pronunciation: '가모! 알렉산드로스 > 시 × 무한대',
+                        slap: 'Γαμώ! 알렉산더가 너보다 무한대로 낫다!',
+                        korean: '와 씨부럴! 알렉산더가 "나 대신 디오게네스가 되고 싶다" 했는디, 니는? 길바닥 개미 똥구녕만도 못한 놈이여! 천둥번개 맞아 뒤질 놈!',
                         buttonText: '죽을만큼 때려!',
                         teeth: '전체'
                     }
@@ -810,7 +909,6 @@
                 language: '독일어',
                 free: false,
                 premium: true,
-                preview: '너는 모든 이성의 부정이다!',
                 levels: [
                     {
                         level: 1,
@@ -818,226 +916,96 @@
                         original: 'Handle nur nach der Maxime',
                         pronunciation: '한들레 누어 나흐 데어 막시메',
                         slap: '너의 격률에 따라 행동하라',
+                        korean: '니 원칙대로 살어, 이 양반아!',
                         buttonText: '김치싸다구!',
                         teeth: 1
                     },
                     {
                         level: 2,
                         title: '중간맛 🌶️🌶️',
-                        original: 'Du verstehst nichts!',
-                        pronunciation: '두 페어슈테스트 니히츠!',
-                        slap: '너는 아무것도 이해 못하는구나!',
+                        original: 'Deine Maxime ist Unsinn!',
+                        pronunciation: '다이네 막시메 이스트 운진!',
+                        slap: '네 원칙은 헛소리다!',
+                        korean: '니 원칙? 그거 개뿔이여! 송장 귀에 경 읽기만도 못한 헛소리당께!',
                         buttonText: '더 세게!',
                         teeth: 3
                     },
                     {
                         level: 3,
                         title: '매운맛 🌶️🌶️🌶️',
-                        original: 'Der kategorische Imperativ befiehlt dir: Verpiss dich!',
-                        pronunciation: '데어 카테고리셰 임페라티프 베필트 디어: 페어피스 디히!',
-                        slap: '말로 안 되네! 정언명령이 너에게 명한다: X져라!',
+                        original: 'Du bist ein wandelnder Widerspruch!',
+                        pronunciation: '두 비스트 아인 반델른더 비더슈프루흐!',
+                        slap: '너는 걸어다니는 모순이다!',
+                        korean: '이 육시럴놈아! 니는 걸어다니는 거시기여! 앞뒤가 안 맞는 호박에 줄 긋는 놈!',
                         buttonText: '진짜 빡세게!',
                         teeth: 5
                     },
                     {
                         level: 4,
                         title: '극한맛 🔥',
-                        original: 'Scheiße! Du bist die Verneinung aller Vernunft!',
-                        pronunciation: '샤이세! 두 비스트 디 페어나이눙 알러 페어눈프트!',
-                        slap: '씨발! 너는 모든 이성의 부정이다!',
+                        original: 'Kategorischer Imperativ: Verschwinde!',
+                        pronunciation: '카테고리셔 임페라티프: 페어슈빈데!',
+                        slap: '정언명령: 사라져라!',
+                        korean: '절대명령이여! "이놈은 당장 씨가 마르고 삼대가 멸해야 쓰겄다!" 천지신명도 포기한 놈!',
                         buttonText: '죽을만큼 때려!',
                         teeth: '전체'
                     }
                 ]
             },
-            // 서양 철학자 추가
             {
-                id: 'sartre',
-                name: '사르트르',
-                emoji: '🚬',
-                quote: '타인은 지옥이다',
-                language: '프랑스어',
-                free: false,
-                premium: true,
-                preview: '네 존재 자체가 구토를 유발한다!'
-            },
-            {
-                id: 'schopenhauer',
-                name: '쇼펜하우어',
-                emoji: '😠',
-                quote: '인생은 고통이다',
+                id: 'hegel',
+                name: '헤겔',
+                emoji: '🌀',
+                quote: '변증법',
                 language: '독일어',
                 free: false,
                 premium: true,
-                preview: '넌 내 염세주의마저 긍정적으로 만들 정도로 최악이다!'
-            },
-            {
-                id: 'marx',
-                name: '마르크스',
-                emoji: '☭',
-                quote: '만국의 프롤레타리아여 단결하라',
-                language: '독일어',
-                free: false,
-                premium: true,
-                preview: '부르주아 X새끼!'
-            },
-            {
-                id: 'freud',
-                name: '프로이트',
-                emoji: '🧠',
-                quote: '무의식이 모든 것을 지배한다',
-                language: '독일어',
-                free: false,
-                premium: true,
-                preview: '네 리비도가 X같은 방향으로 고착됐구나!'
-            },
-            // 역사적 인물
-            {
-                id: 'napoleon',
-                name: '나폴레옹',
-                emoji: '🎖️',
-                quote: '내 사전에 불가능은 없다',
-                language: '프랑스어',
-                free: false,
-                premium: true,
-                preview: '내 사전에 불가능은 없지만 넌 예외다!'
-            },
-            {
-                id: 'churchill',
-                name: '처칠',
-                emoji: '🎩',
-                quote: 'Never give up',
-                language: '영어',
-                free: false,
-                premium: true,
-                preview: 'Never, never, never... 넌 영원히 X이다!'
-            },
-            {
-                id: 'gandhi',
-                name: '간디',
-                emoji: '🕊️',
-                quote: '비폭력 불복종',
-                language: '힌디어',
-                free: false,
-                premium: true,
-                preview: '비폭력주의지만 네 X은 예외다!'
-            },
-            // 과학자
-            {
-                id: 'einstein',
-                name: '아인슈타인',
-                emoji: '🧪',
-                quote: 'E=mc²',
-                language: '독일어',
-                free: false,
-                premium: true,
-                preview: 'E=mc²이고 넌 X²이다!'
-            },
-            {
-                id: 'newton',
-                name: '뉴턴',
-                emoji: '🍎',
-                quote: '만유인력의 법칙',
-                language: '영어',
-                free: false,
-                premium: true,
-                preview: '만유인력도 널 밀어낸다!'
-            },
-            {
-                id: 'darwin',
-                name: '다윈',
-                emoji: '🐒',
-                quote: '진화론',
-                language: '영어',
-                free: false,
-                premium: true,
-                preview: '진화론적으로 넌 퇴화다!'
-            },
-            // 예술가
-            {
-                id: 'vangogh',
-                name: '반 고흐',
-                emoji: '🎨',
-                quote: '별이 빛나는 밤',
-                language: '네덜란드어',
-                free: false,
-                premium: true,
-                preview: '내 귀를 자른 건 네 X소리 때문!'
-            },
-            {
-                id: 'picasso',
-                name: '피카소',
-                emoji: '🖼️',
-                quote: '게르니카',
-                language: '스페인어',
-                free: false,
-                premium: true,
-                preview: '네 얼굴은 입체파도 포기했다!'
-            },
-            // K-레전드
-            {
-                id: 'wonhyo',
-                name: '원효대사',
-                emoji: '🙏',
-                quote: '일체유심조',
-                language: '한문',
-                free: false,
-                premium: true,
-                preview: '해골물도 네 X같은 마음보단 깨끗하다!'
-            },
-            {
-                id: 'kimsatgat',
-                name: '김삿갓',
-                emoji: '👲',
-                quote: '조선 최고 디스 래퍼',
-                language: '한글',
-                free: false,
-                premium: true,
-                preview: '네 면상은 X갓도 못 가린다!'
-            },
-            {
-                id: 'hwangjini',
-                name: '황진이',
-                emoji: '💃',
-                quote: '청산리 벽계수야',
-                language: '한글',
-                free: false,
-                premium: true,
-                preview: '네 X은 벽계수도 씻어줄 수 없구나!'
-            },
-            {
-                id: 'sejong',
-                name: '세종대왕',
-                emoji: '👑',
-                quote: '한글 창제',
-                language: '한글',
-                free: false,
-                premium: true,
-                preview: '한글로도 표현 안 되는 X새끼!'
-            },
-            {
-                id: 'yisunsin',
-                name: '이순신',
-                emoji: '⛵',
-                quote: '필사즉생 필생즉사',
-                language: '한글',
-                free: false,
-                premium: true,
-                preview: '12척으로도 못 이기는 X같은 놈!'
-            },
-            {
-                id: 'toegye',
-                name: '퇴계 이황',
-                emoji: '📖',
-                quote: '성리학 대가',
-                language: '한문',
-                free: false,
-                premium: true,
-                preview: '理도 氣도 없는 X0X아!'
+                levels: [
+                    {
+                        level: 1,
+                        title: '순한맛 🌶️',
+                        original: 'These, Antithese, Synthese',
+                        pronunciation: '테제, 안티테제, 진테제',
+                        slap: '정, 반, 합',
+                        korean: '정반합이여, 이 양반아!',
+                        buttonText: '김치싸다구!',
+                        teeth: 1
+                    },
+                    {
+                        level: 2,
+                        title: '중간맛 🌶️🌶️',
+                        original: 'Deine Dialektik ist kaputt!',
+                        pronunciation: '다이네 디알렉틱 이스트 카푸트!',
+                        slap: '네 변증법은 망가졌다!',
+                        korean: '니 변증법? 거시기가 꼬였구만! 막걸리 마시고 헛소리하는 주정뱅이만도 못하네!',
+                        buttonText: '더 세게!',
+                        teeth: 3
+                    },
+                    {
+                        level: 3,
+                        title: '매운맛 🌶️🌶️🌶️',
+                        original: 'Der Weltgeist hat dich übersprungen!',
+                        pronunciation: '데어 벨트가이스트 하트 디히 위버슈프룽엔!',
+                        slap: '세계정신이 너를 건너뛰었다!',
+                        korean: '어허 이놈! 세계정신도 니는 "아이고 이놈은 건너뛰자" 했겄다! 조상 대대로 병신 유전자!',
+                        buttonText: '진짜 빡세게!',
+                        teeth: 5
+                    },
+                    {
+                        level: 4,
+                        title: '극한맛 🔥',
+                        original: 'Absolute Negation deiner Existenz!',
+                        pronunciation: '압솔루테 네가치온 다이너 엑시스텐츠!',
+                        slap: '네 존재의 절대적 부정!',
+                        korean: '이 천하의 잡놈아! 니 존재는 판소리로 "어화 세상에, 이런 놈은 태어나지 말았어야 할 것을!" 하늘도 땅도 버린 놈!',
+                        buttonText: '죽을만큼 때려!',
+                        teeth: '전체'
+                    }
+                ]
             }
         ];
         
-        // 렌더링 함수
+        // 렌더링 함수들
         function render() {
             const app = document.getElementById('app');
             app.innerHTML = '';
@@ -1081,16 +1049,15 @@
                     <h2 class="text-2xl mb-4"><b>스트레스를 철학으로<br>날려버리세요!</b></h2>
                     <p class="text-gray mb-6">위대한 철학자들이<br>당신을 대신해 점점 더 세게 김치싸다구를!</p>
                     
-                    <div class="mb-4" style="height: 200px; overflow: hidden; border-radius: 0.5rem; background: #f3f4f6; display: flex; align-items: center; justify-content: center;">
-                        <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3BubzV4ajNmcmlnbWdmaHV6ZDV2OW82cmxwMTIxbm93Z2w4a25kciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/hgMUFsEv5sJ0kre11B/giphy.gif" 
+                    <div class="mb-4" style="height: 150px; overflow: hidden; border-radius: 0.5rem; background: #f3f4f6; display: flex; align-items: center; justify-content: center;">
+                        <img src="https://media.giphy.com/media/xT0BKiwgIPGShJNi0g/giphy.gif" 
                              alt="김치싸다구 미리보기" 
-                             style="width: 100%; height: auto; opacity: 0.9;">
+                             style="width: 100%; height: auto; opacity: 0.8;">
                     </div>
                     
                     <button class="btn" onclick="changeStep('target')">시작하기</button>
                     <div class="mt-4 text-sm text-gray">
-                        <div>누적 김치싸다구: <span style="font-weight: bold; color: #dc2626;">${globalSlapCount.toLocaleString()}</span>회</div>
-                        <div style="font-size: 0.75rem; margin-top: 0.25rem;">실시간 업데이트!</div>
+                        누적 김치싸다구: ${(12345 + state.slapCount).toLocaleString()}회
                     </div>
                 </div>
             `;
@@ -1124,7 +1091,7 @@
             `;
         }
         
-        // 캐릭터 선택 화면
+        // 캐릭터 선택 화면 (지역 정보 추가)
         function renderCharacterSelection(app) {
             app.innerHTML = `
                 <div class="card">
@@ -1138,13 +1105,19 @@
                                     onclick="selectCharacter('${char.id}')">
                                 <div class="emoji">${char.face}</div>
                                 <div style="flex: 1;">
-                                    <div class="name">${char.name}</div>
+                                    <div class="name">
+                                        ${char.name}
+                                        <span class="region-badge">${char.region}</span>
+                                    </div>
                                     <div class="quote">${char.features.join(' · ')}</div>
+                                    <div style="font-size: 0.75rem; color: #9ca3af; margin-top: 0.25rem;">
+                                        ${char.style}
+                                    </div>
                                 </div>
                             </button>
                         `).join('')}
                     </div>
-                    <button class="btn-back" onclick="changeStep('target')">← 다시 선택</button>
+                    <button class="text-sm text-gray" onclick="changeStep('target')">← 다시 선택</button>
                 </div>
             `;
         }
@@ -1166,24 +1139,24 @@
                                         ${!phil.free ? '<span class="premium-badge">PREMIUM</span>' : ''}
                                     </div>
                                     <div class="quote">"${phil.quote}"</div>
-                                    ${phil.preview ? `<div style="font-size: 0.75rem; color: #dc2626; margin-top: 0.25rem; font-style: italic;">"${phil.preview}"</div>` : ''}
                                     <div style="font-size: 0.75rem; color: #9ca3af; margin-top: 0.25rem;">
-                                        ${phil.language} ${phil.levels ? '| 4단계 빡침 시스템' : '| Coming Soon!'}
+                                        ${phil.language} | 4단계 빡침 시스템
                                     </div>
                                 </div>
                             </button>
                         `).join('')}
                     </div>
                     
-                    <button class="btn-back" onclick="changeStep('character')">← 다시 선택</button>
+                    <button class="text-sm text-gray" onclick="changeStep('character')">← 다시 선택</button>
                 </div>
             `;
         }
         
-        // 김치싸다구 화면
+        // 김치싸다구 화면 (타겟 반응 추가)
         function renderSlapScreen(app) {
             const phil = state.selectedPhilosopher;
             const char = state.selectedCharacter;
+            const charResponse = characterResponses[char.id];
             const currentLevel = Math.min(state.currentSlapLevel, 4);
             const levelData = phil.levels[currentLevel - 1] || phil.levels[0];
             
@@ -1239,9 +1212,28 @@
                                 <div class="original-text">${levelData.original}</div>
                                 <div class="pronunciation">[${levelData.pronunciation}]</div>
                                 <div class="translation">"${levelData.slap}"</div>
+                                ${levelData.korean ? `
+                                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
+                                        <div class="language-label"><b>전라도 사투리 번역</b></div>
+                                        <div class="translation" style="color: #dc2626;">
+                                            "${levelData.korean}"
+                                        </div>
+                                    </div>
+                                ` : ''}
                             </div>
                             
-                            <div class="text-sm text-gray mb-4">
+                            <!-- 타겟의 반응 추가! -->
+                            <div class="target-response-box">
+                                <div class="text-sm text-gray mb-2">
+                                    <b>${char.name}의 반응</b>
+                                    <span class="region-badge">${char.region} 사투리</span>
+                                </div>
+                                <div class="text-lg" style="color: #d97706;">
+                                    "${charResponse.responses[currentLevel - 1]}"
+                                </div>
+                            </div>
+                            
+                            <div class="text-sm text-gray mb-4" style="margin-top: 1rem;">
                                 이빨 ${levelData.teeth === '전체' ? '전체' : levelData.teeth + '개'} 날아감 🦷✨
                             </div>
                             
@@ -1262,7 +1254,7 @@
                                 </button>
                             </div>
                             
-                            <button class="btn-back" onclick="resetApp()">처음으로</button>
+                            <button class="mt-4 text-sm text-gray" onclick="resetApp()">처음으로</button>
                         </div>
                     `}
                     
@@ -1293,6 +1285,7 @@
             }
             
             const shareData = JSON.parse(shareDataStr);
+            const charResponse = characterResponses[shareData.character.id];
             
             app.innerHTML = `
                 <div class="card">
@@ -1315,9 +1308,29 @@
                         <div class="original-text">${shareData.original}</div>
                         <div class="pronunciation">[${shareData.pronunciation}]</div>
                         <div class="translation">"${shareData.slap}"</div>
+                        ${shareData.korean ? `
+                            <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
+                                <div class="language-label"><b>전라도 사투리 번역</b></div>
+                                <div class="translation" style="color: #dc2626;">
+                                    "${shareData.korean}"
+                                </div>
+                            </div>
+                        ` : ''}
                     </div>
                     
-                    <div class="text-center">
+                    ${shareData.targetResponse ? `
+                        <div class="target-response-box">
+                            <div class="text-sm text-gray mb-2">
+                                <b>${shareData.character.name}의 반응</b>
+                                <span class="region-badge">${shareData.character.region} 사투리</span>
+                            </div>
+                            <div class="text-lg" style="color: #d97706;">
+                                "${shareData.targetResponse}"
+                            </div>
+                        </div>
+                    ` : ''}
+                    
+                    <div class="text-center mt-4">
                         <button class="btn" onclick="resetApp()">나도 김치싸다구 날리기!</button>
                     </div>
                 </div>
@@ -1331,6 +1344,8 @@
         // 공유 모달
         function renderShareModal() {
             const phil = state.selectedPhilosopher;
+            const char = state.selectedCharacter;
+            const charResponse = characterResponses[char.id];
             const currentLevel = Math.min(state.currentSlapLevel, 4);
             const levelData = phil.levels[currentLevel - 1];
             
@@ -1356,6 +1371,10 @@ ${levelData.original}
 [${levelData.pronunciation}]
 
 "${levelData.slap}"
+${levelData.korean ? `\n전라도 사투리: "${levelData.korean}"` : ''}
+
+${char.name}의 반응 (${char.region} 사투리):
+"${charResponse.responses[currentLevel - 1]}"
 
 김치싸다구 ${state.slapCount}대째! 🌶️💥
 
@@ -1373,7 +1392,7 @@ ${state.shareLink}
             document.body.appendChild(modalDiv);
         }
         
-        // 랜덤 GIF 선택 함수 (레벨별)
+        // 랜덤 GIF 선택 함수
         function getRandomSlapGif(level) {
             const gifPool = SLAP_GIFS_BY_LEVEL[level] || SLAP_GIFS_BY_LEVEL[1];
             const randomIndex = Math.floor(Math.random() * gifPool.length);
@@ -1413,11 +1432,10 @@ ${state.shareLink}
             const phil = philosophers.find(p => p.id === id);
             if (phil.free) {
                 state.selectedPhilosopher = phil;
-                state.currentSlapLevel = 0; // 레벨 초기화
+                state.currentSlapLevel = 0;
                 changeStep('slap');
             } else {
-                const preview = phil.preview ? `\n\n미리보기: "${phil.preview}"` : '';
-                alert(`💎 프리미엄 철학자입니다! 💎\n\n${phil.name}의 진짜 욕이 궁금하시죠?${preview}\n\n곧 오픈 예정! 더 많은 철학자의 김치싸다구를 기대해주세요!`);
+                alert('프리미엄 철학자입니다! 🌟\n\n곧 오픈 예정!');
             }
         }
         
@@ -1426,10 +1444,6 @@ ${state.shareLink}
             state.showResult = false;
             state.slapCount++;
             state.currentSlapLevel = Math.min(state.currentSlapLevel + 1, 4);
-            
-            // 전역 슬랩 카운트 증가 및 저장
-            globalSlapCount++;
-            saveSlapCount();
             
             // 레벨에 맞는 GIF 선택
             state.currentGifUrl = getRandomSlapGif(state.currentSlapLevel);
@@ -1453,18 +1467,22 @@ ${state.shareLink}
             state.shareId = shareId;
             
             const phil = state.selectedPhilosopher;
+            const char = state.selectedCharacter;
+            const charResponse = characterResponses[char.id];
             const currentLevel = Math.min(state.currentSlapLevel, 4);
             const levelData = phil.levels[currentLevel - 1];
             
             const shareData = {
                 id: shareId,
                 target: state.targetName,
-                character: state.selectedCharacter,
+                character: char,
                 philosopher: phil,
                 levelTitle: levelData.title,
                 original: levelData.original,
                 pronunciation: levelData.pronunciation,
                 slap: levelData.slap,
+                korean: levelData.korean,
+                targetResponse: charResponse.responses[currentLevel - 1],
                 gifUrl: state.currentGifUrl,
                 timestamp: Date.now()
             };
@@ -1505,45 +1523,11 @@ ${state.shareLink}
             render();
         }
         
-        // 방문자 카운터 업데이트
-        async function updateVisitorCount() {
-            try {
-                // CountAPI를 사용한 방문자 수 카운팅
-                const response = await fetch('https://api.countapi.xyz/hit/kimchislap/visits');
-                const data = await response.json();
-                
-                // 슬랩 카운트도 함께 가져오기
-                const slapResponse = await fetch('https://api.countapi.xyz/get/kimchislap/slaps');
-                const slapData = await slapResponse.json();
-                
-                // 전역 슬랩 카운트 업데이트
-                if (slapData.value) {
-                    globalSlapCount = slapData.value;
-                }
-                
-                // 인트로 화면이면 다시 렌더링
-                if (state.currentStep === 'intro') {
-                    render();
-                }
-            } catch (error) {
-                console.log('카운터 업데이트 실패:', error);
-            }
-        }
-        
-        // 슬랩 카운트를 서버에 저장
-        async function saveSlapCount() {
-            try {
-                await fetch('https://api.countapi.xyz/hit/kimchislap/slaps');
-            } catch (error) {
-                console.log('슬랩 카운트 저장 실패:', error);
-            }
-        }
-        
         // 초기화
         window.onload = function() {
             render();
-            updateVisitorCount();
             console.log('김치싸다구 준비 완료! 🌶️');
+            console.log('지역별 사투리 욕배틀 시스템 활성화!');
         };
     </script>
 </body>
