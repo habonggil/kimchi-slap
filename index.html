@@ -411,7 +411,12 @@
         
         <div class="footer">
             <p>『침실에서 읽는 서양철학사』 × 김치싸다구</p>
-            <p class="mt-4" style="font-size: 1.25rem; font-weight: bold;">Made with 💕 by k-spirit group</p>
+            <p class="mt-4" style="font-size: 1.25rem; font-weight: bold;">Made with 💕 by K-Spirit Group</p>
+            <p class="mt-4">
+                <a href="https://hits.seeyoufarm.com">
+                    <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fhabonggil.github.io%2Fkimchi-slap&count_bg=%23DC2626&title_bg=%23555555&icon=fire&icon_color=%23E7E7E7&title=방문자&edge_flat=false"/>
+                </a>
+            </p>
             <p class="mt-4" style="font-size: 0.625rem; color: #9ca3af;">
                 Powered by GIPHY
             </p>
@@ -434,6 +439,9 @@
             shareId: null,
             currentGifUrl: ''
         };
+        
+        // 전역 슬랩 카운트
+        let globalSlapCount = 12345;
         
         // 🔥 대량 업데이트된 싸다구 GIF URL - 더 많은 랜덤 재미!
         const SLAP_GIFS_BY_LEVEL = {
@@ -1081,7 +1089,8 @@
                     
                     <button class="btn" onclick="changeStep('target')">시작하기</button>
                     <div class="mt-4 text-sm text-gray">
-                        누적 김치싸다구: ${(12345 + state.slapCount).toLocaleString()}회
+                        <div>누적 김치싸다구: <span style="font-weight: bold; color: #dc2626;">${globalSlapCount.toLocaleString()}</span>회</div>
+                        <div style="font-size: 0.75rem; margin-top: 0.25rem;">실시간 업데이트!</div>
                     </div>
                 </div>
             `;
@@ -1418,6 +1427,10 @@ ${state.shareLink}
             state.slapCount++;
             state.currentSlapLevel = Math.min(state.currentSlapLevel + 1, 4);
             
+            // 전역 슬랩 카운트 증가 및 저장
+            globalSlapCount++;
+            saveSlapCount();
+            
             // 레벨에 맞는 GIF 선택
             state.currentGifUrl = getRandomSlapGif(state.currentSlapLevel);
             
@@ -1492,9 +1505,44 @@ ${state.shareLink}
             render();
         }
         
+        // 방문자 카운터 업데이트
+        async function updateVisitorCount() {
+            try {
+                // CountAPI를 사용한 방문자 수 카운팅
+                const response = await fetch('https://api.countapi.xyz/hit/kimchislap/visits');
+                const data = await response.json();
+                
+                // 슬랩 카운트도 함께 가져오기
+                const slapResponse = await fetch('https://api.countapi.xyz/get/kimchislap/slaps');
+                const slapData = await slapResponse.json();
+                
+                // 전역 슬랩 카운트 업데이트
+                if (slapData.value) {
+                    globalSlapCount = slapData.value;
+                }
+                
+                // 인트로 화면이면 다시 렌더링
+                if (state.currentStep === 'intro') {
+                    render();
+                }
+            } catch (error) {
+                console.log('카운터 업데이트 실패:', error);
+            }
+        }
+        
+        // 슬랩 카운트를 서버에 저장
+        async function saveSlapCount() {
+            try {
+                await fetch('https://api.countapi.xyz/hit/kimchislap/slaps');
+            } catch (error) {
+                console.log('슬랩 카운트 저장 실패:', error);
+            }
+        }
+        
         // 초기화
         window.onload = function() {
             render();
+            updateVisitorCount();
             console.log('김치싸다구 준비 완료! 🌶️');
         };
     </script>
