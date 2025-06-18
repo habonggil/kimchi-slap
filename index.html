@@ -434,18 +434,29 @@ const philosopherInsults = {
 };
         
         // GIPHY 싸다구 GIF URL들
-        const slapGifs = [
-            "https://media.giphy.com/media/xT0BKiwgIPGShJNi0g/giphy.gif",
-            "https://media.giphy.com/media/Zau0yrl17uzdK/giphy.gif",
-            "https://media.giphy.com/media/wOXQvz3FwajVm/giphy.gif",
-            "https://media.giphy.com/media/3XlEk2RxPS1m8/giphy.gif",
-            "https://media.giphy.com/media/mEtSQlxqBtWWA/giphy.gif",
-            "https://media.giphy.com/media/j3iGKfXRKlLqw/giphy.gif",
-            "https://media.giphy.com/media/uqSU9IEYEKAbS/giphy.gif",
-            "https://media.giphy.com/media/Ql5voX2wAVUYw/giphy.gif",
-            "https://media.giphy.com/media/RXKCMLmch5W2Q/giphy.gif",
-            "https://media.giphy.com/media/s5zXKfeXaa6ZO/giphy.gif"
-        ];
+const slapGifs = [
+    // 기존 10개
+    "https://media.giphy.com/media/xT0BKiwgIPGShJNi0g/giphy.gif",
+    "https://media.giphy.com/media/Zau0yrl17uzdK/giphy.gif",
+    "https://media.giphy.com/media/wOXQvz3FwajVm/giphy.gif",
+    "https://media.giphy.com/media/3XlEk2RxPS1m8/giphy.gif",
+    "https://media.giphy.com/media/mEtSQlxqBtWWA/giphy.gif",
+    "https://media.giphy.com/media/j3iGKfXRKlLqw/giphy.gif",
+    "https://media.giphy.com/media/uqSU9IEYEKAbS/giphy.gif",
+    "https://media.giphy.com/media/Ql5voX2wAVUYw/giphy.gif",
+    "https://media.giphy.com/media/RXKCMLmch5W2Q/giphy.gif",
+    "https://media.giphy.com/media/s5zXKfeXaa6ZO/giphy.gif",
+    
+    // 새로 추가된 8개
+    "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExeGRrOHJvNm0waXRmZjYwMjlldnRlMHJuczFla2Fha2d5aGxhdTBvNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/uG3lKkAuh53wc/giphy.gif",
+    "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExeDA5amlzdmZmY2JpMHhnZG1hbHNyYmJoY2FhbzJyamc4amNrdDR0eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/4maPzsZTtsMsE/giphy.gif",
+    "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZzR6aGdrYzh3Z2hncWE4czd6M2Z1eHVwYzFsMnJtbWFwMWxsd21sZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QFacpnPZwIqXe/giphy.gif",
+    "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjMzZXhxbGY4dGw2Zm11enU1azBvNWJqMGkzczd3Z2F2b24xYTFwcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qIFN1Y9XE7CpO/giphy.gif",
+    "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdzI0YXY1bno0djl3OWZ0MHg0MnpneW14OHgwbTd2aTFnNng4ZHFodCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gL9Yb3E4DuCc/giphy.gif",
+    "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHltdW5panJ6djk5Z2tnYm0wMDFlNTI0dmRtdTBuN2lnd2YxMW40biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/kGp1x2hGViJoHrYOM3/giphy.gif",
+    "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHkyazFwanR1ZWdxZWNsaTc4bmoxN3VwZ3V4M3Awc2hrOXJycGtrbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o752gPI09ZLYk84Ok/giphy.gif",
+    "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3J4ZmUydGJjNjBrYWFhdzFremw4dHpwcWdqeGRnb21tODd0eDY3bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/k8HEN7qfZ23cI/giphy.gif"
+];
         
         // 렌더링 함수
         function render() {
