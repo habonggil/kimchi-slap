@@ -3,1051 +3,365 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="김치싸다구 - 철학자가 대신 때려드립니다! 점점 더 세게!">
-    <meta property="og:title" content="김치싸다구 - 철학자가 대신 때려드립니다">
-    <meta property="og:description" content="니체, 칸트, 소크라테스가 당신을 대신해 점점 더 세게 김치싸다구를!">
     <title>김치싸다구 - 철학자가 대신 때려드립니다</title>
+    
+    <!-- SNS 공유용 메타 태그 -->
+    <meta property="og:title" content="김치싸다구 - 철학자가 대신 때려드립니다">
+    <meta property="og:description" content="스트레스를 철학으로 날려버리세요!">
+    <meta property="og:image" content="https://habonggil.github.io/kimchi-slap/Slap_Kimchi_GIF_by_kwaesam.gif">
+    <meta property="og:image:type" content="image/gif">
+    <meta property="og:url" content="https://habonggil.github.io/kimchi-slap/">
+    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(to bottom, #fee2e2, #ffffff);
+            background-color: #fce4ec;
+            margin: 0;
+            padding: 0;
             min-height: 100vh;
-            padding: 1rem;
+            display: flex;
+            flex-direction: column;
         }
         
         .container {
-            max-width: 448px;
+            max-width: 600px;
             margin: 0 auto;
+            padding: 1rem;
+            flex: 1;
         }
         
         .header {
             text-align: center;
-            margin-bottom: 2rem;
-            padding-top: 2rem;
+            padding: 2rem 0;
         }
         
         .header h1 {
-            font-size: 2.5rem;
-            font-weight: bold;
+            font-size: 3rem;
+            font-weight: 900;
             color: #dc2626;
-            margin-bottom: 0.5rem;
+            text-shadow: 3px 3px 0px #ff6b6b, 6px 6px 10px rgba(0,0,0,0.3);
+            letter-spacing: -0.05em;
+            animation: pulse 2s ease-in-out infinite;
+            margin: 0;
         }
         
         .header p {
             color: #6b7280;
+            margin-top: 0.5rem;
         }
         
         .card {
             background: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             padding: 2rem;
             margin-bottom: 2rem;
         }
         
         .btn {
-            background: #dc2626;
+            background-color: #dc2626;
             color: white;
             border: none;
-            padding: 0.75rem 2rem;
+            padding: 0.75rem 1.5rem;
             border-radius: 9999px;
-            font-size: 1.125rem;
+            font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.2s;
+            box-shadow: 0 4px 6px rgba(220, 38, 38, 0.3);
         }
         
         .btn:hover {
-            background: #b91c1c;
-            transform: scale(1.05);
+            background-color: #b91c1c;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(220, 38, 38, 0.4);
         }
         
-        .btn:disabled {
-            background: #9ca3af;
-            cursor: not-allowed;
+        .btn:active {
+            transform: translateY(0);
         }
         
         .btn-secondary {
-            background: #6b7280;
+            background-color: #6b7280;
+            box-shadow: 0 4px 6px rgba(107, 114, 128, 0.3);
         }
         
         .btn-secondary:hover {
-            background: #4b5563;
+            background-color: #4b5563;
         }
         
-        .btn-success {
-            background: #10b981;
-        }
-        
-        .btn-success:hover {
-            background: #059669;
-        }
-        
-        .btn-level-2 {
-            background: #f59e0b;
-        }
-        
-        .btn-level-2:hover {
-            background: #d97706;
-        }
-        
-        .btn-level-3 {
-            background: #ef4444;
-        }
-        
-        .btn-level-3:hover {
-            background: #dc2626;
-        }
-        
-        .btn-level-4 {
-            background: #7c3aed;
-            animation: pulse 1s infinite;
-        }
-        
-        .btn-level-4:hover {
-            background: #6d28d9;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-        
-        .text-red { color: #dc2626; font-weight: bold; }
-        .text-gray { color: #6b7280; }
-        .text-sm { font-size: 0.875rem; }
-        .text-lg { font-size: 1.125rem; }
-        .text-2xl { font-size: 1.5rem; }
-        .text-6xl { font-size: 3.75rem; }
-        .text-center { text-align: center; }
-        .mb-2 { margin-bottom: 0.5rem; }
-        .mb-3 { margin-bottom: 0.75rem; }
-        .mb-4 { margin-bottom: 1rem; }
-        .mb-6 { margin-bottom: 1.5rem; }
-        .mt-4 { margin-top: 1rem; }
-        .font-bold { font-weight: bold; }
-        
+        /* 타겟 선택 스타일 */
         .target-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
             margin-bottom: 1.5rem;
         }
         
+        @media (max-width: 640px) {
+            .target-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .target-category {
+            font-size: 0.875rem;
+            font-weight: bold;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+            margin-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
         .target-btn {
-            padding: 1.5rem;
+            padding: 1rem 0.5rem;
             border: 2px solid #e5e7eb;
-            border-radius: 0.5rem;
+            border-radius: 0.75rem;
             background: white;
             cursor: pointer;
             transition: all 0.2s;
             text-align: center;
+            font-size: 0.875rem;
+            position: relative;
+            overflow: hidden;
         }
         
         .target-btn:hover {
             border-color: #dc2626;
             background: #fee2e2;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.2);
         }
         
         .target-btn.selected {
             border-color: #dc2626;
             background: #fee2e2;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.2);
         }
         
         .target-btn .emoji {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 2rem;
+            margin-bottom: 0.25rem;
+            display: block;
         }
         
-        .input-group {
-            margin-bottom: 1rem;
-        }
-        
-        .input-group input {
+        .name-input {
             width: 100%;
             padding: 0.75rem;
             border: 2px solid #e5e7eb;
             border-radius: 0.5rem;
             font-size: 1rem;
+            transition: all 0.2s;
+            margin-bottom: 1rem;
         }
         
-        .input-group input:focus {
+        .name-input:focus {
             outline: none;
             border-color: #dc2626;
         }
         
-        .philosopher-list {
-            max-height: 24rem;
-            overflow-y: auto;
-            margin-bottom: 1rem;
+        /* 김치싸다구 화면 */
+        .slap-result {
+            text-align: center;
         }
         
-        .philosopher-item {
+        .slap-gif {
             width: 100%;
-            padding: 1rem;
-            border: 2px solid #e5e7eb;
-            border-radius: 0.5rem;
-            background: white;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-bottom: 0.75rem;
-            text-align: left;
-            display: flex;
-            align-items: center;
-        }
-        
-        .philosopher-item:hover {
-            border-color: #dc2626;
-            background: #fee2e2;
-        }
-        
-        .philosopher-item.premium {
-            border-color: #fbbf24;
-            background: #fef3c7;
-            opacity: 0.75;
-        }
-        
-        .philosopher-item .emoji {
-            font-size: 2rem;
-            margin-right: 1rem;
-        }
-        
-        .philosopher-item .name {
-            font-weight: bold;
-            margin-bottom: 0.25rem;
-        }
-        
-        .philosopher-item .quote {
-            font-size: 0.875rem;
-            color: #6b7280;
-        }
-        
-        .premium-badge {
-            background: #fbbf24;
-            color: white;
-            font-size: 0.75rem;
-            padding: 0.125rem 0.5rem;
-            border-radius: 0.25rem;
-            margin-left: 0.5rem;
-        }
-        
-        .language-box {
-            background: #f3f4f6;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .language-label {
-            font-size: 0.875rem;
-            color: #6b7280;
-            margin-bottom: 0.5rem;
-        }
-        
-        .original-text {
-            font-size: 1.25rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-        
-        .pronunciation {
-            font-size: 0.875rem;
-            color: #4b5563;
-            margin-bottom: 0.5rem;
-        }
-        
-        .translation {
-            font-size: 1.5rem;
-            color: #dc2626;
-            font-weight: bold;
-        }
-        
-        .target-response-box {
-            margin-top: 1.5rem;
-            padding: 1rem;
-            background: #fef3c7;
-            border-radius: 0.5rem;
-            border: 2px solid #fbbf24;
-        }
-        
-        .region-badge {
-            display: inline-block;
-            background: #e5e7eb;
-            color: #4b5563;
-            padding: 0.125rem 0.5rem;
-            border-radius: 0.25rem;
-            font-size: 0.75rem;
-            margin-left: 0.5rem;
-        }
-        
-        .modal {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-            z-index: 50;
-        }
-        
-        .modal-content {
-            background: white;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            max-width: 24rem;
-            width: 100%;
-        }
-        
-        .share-text {
-            background: #f3f4f6;
-            padding: 1rem;
+            max-width: 400px;
+            height: 300px;
+            object-fit: contain;
             border-radius: 0.5rem;
             margin: 1rem 0;
-            white-space: pre-wrap;
-            user-select: all;
         }
         
-        .share-preview {
-            background: #f9fafb;
-            border: 2px solid #e5e7eb;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            margin-bottom: 1rem;
-        }
-        
-        .share-preview-title {
+        .insult-text {
+            font-size: 1.5rem;
             font-weight: bold;
-            margin-bottom: 0.5rem;
+            color: #dc2626;
+            margin: 1rem 0;
+            line-height: 1.5;
         }
         
-        .animate-pulse {
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        .combo-display {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #f97316;
+            margin: 1rem 0;
         }
+        
+        /* 애니메이션 */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        /* 유틸리티 클래스 */
+        .text-center { text-align: center; }
+        .text-sm { font-size: 0.875rem; }
+        .text-lg { font-size: 1.125rem; }
+        .text-xl { font-size: 1.25rem; }
+        .text-2xl { font-size: 1.5rem; }
+        .text-6xl { font-size: 3.75rem; }
+        .text-gray { color: #6b7280; }
+        .text-red { color: #dc2626; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mt-4 { margin-top: 1rem; }
+        .flex { display: flex; }
+        .gap-4 { gap: 1rem; }
+        .justify-center { justify-content: center; }
         
         .footer {
             text-align: center;
-            margin-top: 2rem;
-            font-size: 0.875rem;
+            padding: 2rem 1rem;
             color: #6b7280;
-        }
-        
-        .gif-container {
-            margin: 1rem auto;
-            text-align: center;
-            position: relative;
-            min-height: 300px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .gif-container img {
-            width: 100%;
-            max-width: 400px;
-            height: auto;
-            max-height: 400px;
-            object-fit: contain;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-        
-        .loading-gif {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #f3f3f3;
-            border-radius: 50%;
-            border-top: 5px solid #dc2626;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .level-indicator {
-            display: inline-block;
-            background: #fee2e2;
-            color: #dc2626;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
             font-size: 0.875rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
         }
         
-        .anger-meter {
-            width: 100%;
-            height: 8px;
-            background: #e5e7eb;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-            overflow: hidden;
-        }
-        
-        .anger-meter-fill {
-            height: 100%;
-            background: #dc2626;
-            transition: width 0.5s ease;
+        .footer a {
+            color: #dc2626;
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-   <h1 style="
-    font-size: 3rem;
-    font-weight: 900;
-    background: linear-gradient(45deg, #ff0000, #ff4444, #ff6666);  /* 더 진한 빨강 */
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: 4px 4px 15px rgba(255,0,0,0.5);  /* 그림자도 진하게 */
-    letter-spacing: -0.05em;
-    animation: pulse 2s ease-in-out infinite;
-">김치싸다구 <span style="font-size: 2.5rem;">🌶️💥</span></h1>
-    <!-- <p> 태그 삭제 (설명 제거) -->
-</div>
+            <h1>김치싸다구 <span style="font-size: 2.5rem;">🌶️💥</span></h1>
+        </div>
         
         <div id="app"></div>
         
         <div class="footer">
-            <p>『침실에서 읽는 서양철학사』 × 김치싸다구</p>
-            <p class="mt-4">Made with 💕 by 하윤 & 감독님</p>
+            『침실에서 읽는 서양철학사』 × 김치싸다구<br>
+            Made with 💕 by 하윤 & 감독님
         </div>
     </div>
     
     <script>
-        // 전역 상태
-        let state = {
+        // 상태 관리
+        const state = {
             currentStep: 'intro',
-            selectedTarget: '',
+            target: null,
+            targetType: '',
             targetName: '',
-            selectedCharacter: null,
-            selectedPhilosopher: null,
-            slapCount: 0,
-            currentSlapLevel: 0,
-            isSlapping: false,
-            showResult: false,
-            showShareModal: false,
-            shareId: null,
-            currentGifUrl: ''
-        };
-        
-        // 수정된 GIF URL
-        const SLAP_GIFS_BY_LEVEL = {
-            1: [
-                'https://media.giphy.com/media/xT8qB7Sbwskk27Rdy8/giphy.gif',
-                'https://media.giphy.com/media/mwmABstBIAHte/giphy.gif',
-                'https://media.giphy.com/media/26vUKvewPK60uz9Dy/giphy.gif',
-                'https://media.giphy.com/media/gL9Yb3E4DuCc/giphy.gif',
-                'https://media.giphy.com/media/dUrwQ4E1oXfWLG1ud2/giphy.gif'
-            ],
-            2: [
-                'https://media.giphy.com/media/lSZDrBZVHLy7yVITht/giphy.gif',
-                'https://media.giphy.com/media/K3ZjR6Dc22t9e/giphy.gif',
-                'https://media.giphy.com/media/deKWTyMOYLkje/giphy.gif',
-                'https://media.giphy.com/media/gSIz6gGLhguOY/giphy.gif',
-                'https://media.giphy.com/media/IAAXyr5GU73xK/giphy.gif'
-            ],
-            3: [
-                'https://media.giphy.com/media/xT9Nvl9F0gFzyAHiwg/giphy.gif',
-                'https://media.giphy.com/media/12LjisUEAp8bx6/giphy.gif',
-                'https://media.giphy.com/media/3XlEk2RxPS1m8/giphy.gif',
-                'https://media.giphy.com/media/l41YkEYrcqrPOpuIE/giphy.gif',
-                'https://media.giphy.com/media/mEtSQlxqBtWWA/giphy.gif'
-            ],
-            4: [
-                'https://media.giphy.com/media/9U5J7JpaYBr68/giphy.gif',
-                'https://media.giphy.com/media/uqSU9IEYEKAbS/giphy.gif',
-                'https://media.giphy.com/media/Qs0I2VdbIqNkk/giphy.gif',
-                'https://media.giphy.com/media/mwmABstBIAHte/giphy.gif',
-                'https://media.giphy.com/media/bGnQmK38QoSg8/giphy.gif'
-            ]
+            slapCount: parseInt(localStorage.getItem('slapCount') || '0'),
+            comboCount: 0,
+            lastSlapTime: 0
         };
         
         // 타겟 데이터
-        const targets = {
-            boss: { name: '상사', emoji: '👔' },
-            professor: { name: '교수', emoji: '👨‍🏫' },
-            politician: { name: '정치인', emoji: '🤵' },
-            friend: { name: '친구', emoji: '👥' }
+        const targetCategories = {
+            work: {
+                name: '직장편',
+                targets: {
+                    boss: { name: '상사', emoji: '👔', desc: '갑질 부장' },
+                    teamLead: { name: '팀장', emoji: '📊', desc: '일만 시키는' },
+                    hr: { name: '인사팀', emoji: '📋', desc: '연봉 동결' },
+                    client: { name: '거래처', emoji: '💼', desc: '진상 클라이언트' }
+                }
+            },
+            school: {
+                name: '학교편',
+                targets: {
+                    professor: { name: '교수', emoji: '👨‍🏫', desc: '꼰대 교수' },
+                    assistant: { name: '조교', emoji: '📚', desc: '권력 남용' },
+                    senior: { name: '선배', emoji: '🎓', desc: '군기 잡는' },
+                    classmate: { name: '동기', emoji: '👥', desc: '뒷담화 전문' }
+                }
+            },
+            daily: {
+                name: '일상편',
+                targets: {
+                    motherInLaw: { name: '시어머니', emoji: '👵', desc: '잔소리 폭탄' },
+                    relative: { name: '친척', emoji: '👨‍👩‍👧‍👦', desc: '결혼은 언제?' },
+                    neighbor: { name: '이웃', emoji: '🏘️', desc: '층간소음' },
+                    delivery: { name: '배달기사', emoji: '🛵', desc: '음식 엎은' }
+                }
+            },
+            online: {
+                name: '온라인편',
+                targets: {
+                    troll: { name: '악플러', emoji: '🧌', desc: '키보드 워리어' },
+                    scammer: { name: '사기꾼', emoji: '🦹‍♂️', desc: '중고거래 먹튀' },
+                    spammer: { name: '스팸', emoji: '📧', desc: '광고 도배범' },
+                    hacker: { name: '해커', emoji: '💻', desc: '계정 털이범' }
+                }
+            },
+            special: {
+                name: '특별편',
+                targets: {
+                    ex: { name: '전애인', emoji: '💔', desc: '잊을 수 없는' },
+                    myself: { name: '나 자신', emoji: '🪞', desc: '자괴감 폭발' },
+                    ai: { name: 'AI', emoji: '🤖', desc: '에러만 내는' },
+                    custom: { name: 'Custom', emoji: '✏️', desc: '직접 입력' }
+                }
+            }
         };
         
-        // 캐릭터 프리셋 with 지역 정보
-        const characters = {
-            boss: [
-                { 
-                    id: 'boss40m', 
-                    name: '40대 김부장', 
-                    face: '😠', 
-                    features: ['배나옴', '대머리', '넥타이'],
-                    region: '경상도',
-                    style: '경상도 욕쟁이'
-                },
-                { 
-                    id: 'boss50m', 
-                    name: '50대 박상무', 
-                    face: '😤', 
-                    features: ['흰머리', '안경', '권위적'],
-                    region: '전라도',
-                    style: '전라도 어르신'
-                },
-                { 
-                    id: 'boss30f', 
-                    name: '30대 최팀장', 
-                    face: '😒', 
-                    features: ['칼단발', '차가움', '독설가'],
-                    region: '서울/경기',
-                    style: 'MZ세대 독설'
-                }
+        // 욕 데이터 (콤보에 따라 강도 증가)
+        const philosopherInsults = {
+            level1: [
+                "너 자신을 알라? 넌 몰라도 돼!",
+                "이데아? 니 머릿속엔 공기만!",
+                "중용? 넌 그냥 극단적 바보!",
+                "생각을 안 해서 존재가 없어!",
+                "님은 자연의 실수작!",
+                "님 없는 세계가 최선!"
             ],
-            professor: [
-                { 
-                    id: 'prof50m', 
-                    name: '50대 꼰대교수', 
-                    face: '🧐', 
-                    features: ['안경', '수염', '권위적'],
-                    region: '충청도',
-                    style: '충청도 느긋한 욕'
-                },
-                { 
-                    id: 'prof60m', 
-                    name: '60대 노교수', 
-                    face: '👴', 
-                    features: ['흰머리', '고집', '보수적'],
-                    region: '강원도',
-                    style: '강원도 투박한 욕'
-                }
+            level2: [
+                "씨발 대가리에 뭐가 들었냐?",
+                "좆도 쓸모없는 새끼!",
+                "니 존재 자체가 민폐야!",
+                "지가 병신인 줄도 모르는 병신!",
+                "걸어다니는 재앙 덩어리!",
+                "님한텐 자비 없다! 까르마!"
             ],
-            politician: [
-                { 
-                    id: 'pol50m', 
-                    name: '50대 정치인', 
-                    face: '🤥', 
-                    features: ['가발', '뻔뻔함', '양복'],
-                    region: '전라도',
-                    style: '전라도 판소리'
-                }
-            ],
-            friend: [
-                { 
-                    id: 'friend20m', 
-                    name: '20대 MZ후배', 
-                    face: '😏', 
-                    features: ['건방짐', '무례함', 'FM'],
-                    region: 'MZ세대',
-                    style: '인터넷 슬랭'
-                }
+            level3: [
+                "니 부모가 널 낳은 게 인류의 재앙!",
+                "숨 쉬는 것도 자원 낭비!",
+                "지구상에서 사라져야 할 1순위!",
+                "만국의 노동자가 님을 규탄한다!",
+                "신도 자연도 님을 포기했어!",
+                "전 인류가 님을 싫어해!"
             ]
         };
         
-        // 타겟별 반응 (지역 사투리)
-        const characterResponses = {
-            boss30f: { // 30대 최팀장 - 서울/경기 MZ세대
-                responses: [
-                    "어? 진짜 개빡치네?",
-                    "아 ㅈㄴ 짜증나! 니가 뭔데?",
-                    "와 진짜 레전드다 너... 최악이야",
-                    "아 진심 극혐! 토 나와!"
-                ]
-            },
-            boss40m: { // 40대 김부장 - 경상도
-                responses: [
-                    "와이라노! 니가 뭔데!",
-                    "아이다 이기! 가가 호로자슥이가!",
-                    "마! 니 대가리에 뭐가 들었노!",
-                    "아따 이 새끼가 환장하겄네!"
-                ]
-            },
-            boss50m: { // 50대 박상무 - 전라도
-                responses: [
-                    "아따 이 육시럴놈이!",
-                    "거시기 뭐시여, 니가 감히!",
-                    "와 씨부럴! 호로자슥 같은 놈!",
-                    "천하에 몹쓸 놈이구만!"
-                ]
-            },
-            prof50m: { // 50대 교수 - 충청도
-                responses: [
-                    "아니 그려~ 이 사람이 왜 이러셔~",
-                    "거 참... 사람이 그러면 쓰겄나?",
-                    "아이고~ 머리가 텅 비었구먼~",
-                    "쯧쯧... 조상님이 한탄하시겄네~"
-                ]
-            },
-            prof60m: { // 60대 교수 - 강원도
-                responses: [
-                    "아이고 이 베라먹을 놈!",
-                    "뭐이 이런 호랭이 물어갈 놈이!",
-                    "감자 대가리 같은 놈이구만!",
-                    "산신령도 포기한 놈이야!"
-                ]
-            },
-            pol50m: { // 50대 정치인 - 전라도
-                responses: [
-                    "어화! 이놈이 제정신이 아니구만!",
-                    "아따! 천하의 잡놈이여!",
-                    "거시기 뭐시여, 삼대가 멸족할 놈!",
-                    "하늘도 땅도 버린 육시럴놈!"
-                ]
-            },
-            friend20m: { // 20대 MZ친구
-                responses: [
-                    "ㅋㅋㅋㅋ 뭐임? 개웃기네",
-                    "아 ㅅㅂ 진짜 빡치네;;",
-                    "와... 이건 좀 에바참치인듯",
-                    "ㄹㅇ 개극혐;; 토나와"
-                ]
-            }
-        };
-        
-        // 철학자 데이터 (동일하게 유지)
-        const philosophers = [
-            {
-                id: 'socrates',
-                name: '소크라테스',
-                emoji: '🧔',
-                quote: '너 자신을 알라',
-                language: '고대 그리스어',
-                free: true,
-                levels: [
-                    {
-                        level: 1,
-                        title: '순한맛 🌶️',
-                        original: 'Γνῶθι σεαυτόν',
-                        pronunciation: '그노티 세아우톤',
-                        slap: '너 자신을 알라',
-                        korean: '니 주제를 알어, 이 양반아!',
-                        buttonText: '김치싸다구!',
-                        teeth: 1
-                    },
-                    {
-                        level: 2,
-                        title: '중간맛 🌶️🌶️',
-                        original: 'Οὐδὲν οἶδα, ἀλλὰ σὺ οὐδὲ τοῦτο!',
-                        pronunciation: '우덴 오이다, 알라 시 우데 투토!',
-                        slap: '나는 모른다는 걸 아는데, 너는 그것조차 모른다!',
-                        korean: '어허 이놈아! 나는 모른다는 걸 알제만, 니는 호로자슥이라는 것도 모르는 육시럴놈이구만!',
-                        buttonText: '더 세게!',
-                        teeth: 3
-                    },
-                    {
-                        level: 3,
-                        title: '매운맛 🌶️🌶️🌶️',
-                        original: 'Βίος ἀνεξέταστος οὐ βιωτὸς ἀνθρώπῳ, μαλάκα!',
-                        pronunciation: '비오스 아넥세타스토스 우 비오토스 안트로포, 말라카!',
-                        slap: '성찰 없는 삶은 살 가치가 없다, 이 멍청이야!',
-                        korean: '거시기 뭐시여, 생각 없이 사는 니 인생은 개보다 못한 거시기여! 썩은 동태 눈깔 같은 놈!',
-                        buttonText: '진짜 빡세게!',
-                        teeth: 5
-                    },
-                    {
-                        level: 4,
-                        title: '극한맛 🔥',
-                        original: 'Τὸ κώνειον ἡδύτερον τῆς συνουσίας μετὰ σοῦ!',
-                        pronunciation: '토 코네이온 헤뒤테론 테스 시누시아스 메타 수!',
-                        slap: '독배가 너와의 대화보다 달콤하다!',
-                        korean: '아따 미친새끼! 독약 마시고 죽는 게 니랑 말 섞는 것보다 낫겄네! 천하에 몹쓸 놈!',
-                        buttonText: '죽을만큼 때려!',
-                        teeth: '전체'
-                    }
-                ]
-            },
-            {
-                id: 'plato',
-                name: '플라톤',
-                emoji: '👨‍🎓',
-                quote: '동굴의 비유',
-                language: '고대 그리스어',
-                free: true,
-                levels: [
-                    {
-                        level: 1,
-                        title: '순한맛 🌶️',
-                        original: 'Ἔξελθε ἐκ τοῦ σπηλαίου',
-                        pronunciation: '엑셀테 에크 투 스펠라이우',
-                        slap: '동굴에서 나와라',
-                        korean: '동굴에서 나오그라, 이 답답한 놈아!',
-                        buttonText: '김치싸다구!',
-                        teeth: 1
-                    },
-                    {
-                        level: 2,
-                        title: '중간맛 🌶️🌶️',
-                        original: 'Σκιὰς μόνον βλέπεις, ἠλίθιε!',
-                        pronunciation: '스키아스 모논 블레페이스, 일리티에!',
-                        slap: '너는 그림자만 보고 있다, 바보야!',
-                        korean: '어허 이놈! 그림자만 보고 지랄하는 호랑이 담배 피던 시절 놈이구만!',
-                        buttonText: '더 세게!',
-                        teeth: 3
-                    },
-                    {
-                        level: 3,
-                        title: '매운맛 🌶️🌶️🌶️',
-                        original: 'Ἡ ἰδέα σου ἐστὶ κόπρος!',
-                        pronunciation: '헤 이데아 수 에스티 코프로스!',
-                        slap: '네 이데아는 똥이다!',
-                        korean: '니가 생각하는 진리? 그거 말똥구리가 굴리는 똥덩어리여! 개잡놈의 새끼!',
-                        buttonText: '진짜 빡세게!',
-                        teeth: 5
-                    },
-                    {
-                        level: 4,
-                        title: '극한맛 🔥',
-                        original: 'Ἐν τῷ κόσμῳ τῶν ἰδεῶν, οὐκ ὑπάρχεις!',
-                        pronunciation: '엔 토 코스모 톤 이데온, 우크 휘파르케이스!',
-                        slap: '이데아의 세계에 너는 존재하지 않는다!',
-                        korean: '이 육시럴 놈아! 완벽한 세계에는 니 같은 쌍놈은 있을 자리가 없당께! 삼대가 멸족할 놈!',
-                        buttonText: '죽을만큼 때려!',
-                        teeth: '전체'
-                    }
-                ]
-            },
-            {
-                id: 'nietzsche',
-                name: '니체',
-                emoji: '👨',
-                quote: '신은 죽었다',
-                language: '독일어',
-                free: true,
-                levels: [
-                    {
-                        level: 1,
-                        title: '순한맛 🌶️',
-                        original: 'Gott ist tot',
-                        pronunciation: '고트 이스트 토트',
-                        slap: '신은 죽었다',
-                        korean: '신은 죽었당께, 이 양반아!',
-                        buttonText: '김치싸다구!',
-                        teeth: 1
-                    },
-                    {
-                        level: 2,
-                        title: '중간맛 🌶️🌶️',
-                        original: 'Du bist der letzte Mensch!',
-                        pronunciation: '두 비스트 데어 레츠테 멘쉬!',
-                        slap: '너는 마지막 인간이다!',
-                        korean: '니는 말세놈이여! 판소리로 치면 "어화 이놈아, 니가 바로 세상 망치는 마지막 호로새끼구만!"',
-                        buttonText: '더 세게!',
-                        teeth: 3
-                    },
-                    {
-                        level: 3,
-                        title: '매운맛 🌶️🌶️🌶️',
-                        original: 'Ewige Wiederkunft deiner Dummheit!',
-                        pronunciation: '에비게 비더쿤프트 다이너 둠하이트!',
-                        slap: '네 멍청함의 영원회귀!',
-                        korean: '아따 거시기! 니 멍청함은 영원히 돌고 돌아 후손대대로 이어지겄네! 조상님이 통곡하실 놈!',
-                        buttonText: '진짜 빡세게!',
-                        teeth: 5
-                    },
-                    {
-                        level: 4,
-                        title: '극한맛 🔥',
-                        original: 'Der Übermensch würde dich zertreten!',
-                        pronunciation: '데어 위버멘쉬 뷔르데 디히 체어트레텐!',
-                        slap: '초인이 너를 짓밟을 것이다!',
-                        korean: '초인? 아니여! 동네 개도 니를 무시하고 오줌 갈길 놈이여! 이 천하의 잡놈아!',
-                        buttonText: '죽을만큼 때려!',
-                        teeth: '전체'
-                    }
-                ]
-            },
-            {
-                id: 'aristotle',
-                name: '아리스토텔레스',
-                emoji: '📚',
-                quote: '중용이 최고의 덕',
-                language: '고대 그리스어',
-                free: true,
-                levels: [
-                    {
-                        level: 1,
-                        title: '순한맛 🌶️',
-                        original: 'Μέσον ἄριστον',
-                        pronunciation: '메손 아리스톤',
-                        slap: '중용이 최고다',
-                        korean: '중간이 최고여, 이 양반아!',
-                        buttonText: '김치싸다구!',
-                        teeth: 1
-                    },
-                    {
-                        level: 2,
-                        title: '중간맛 🌶️🌶️',
-                        original: 'Οὐδὲν ἄγαν, ἠλίθιε!',
-                        pronunciation: '우덴 아간, 일리티에!',
-                        slap: '과하지 말라고 했지, 멍청아!',
-                        korean: '아따! 뭐든 적당히 하라니께! 니는 뭐든 과해서 탈이여!',
-                        buttonText: '더 세게!',
-                        teeth: 3
-                    },
-                    {
-                        level: 3,
-                        title: '매운맛 🌶️🌶️🌶️',
-                        original: 'Εἶ ἄκρως ἠλίθιος!',
-                        pronunciation: '에이 아크로스 일리티오스!',
-                        slap: '너는 극도로 멍청하다!',
-                        korean: '거시기 뭐시여! 니는 중용은 개뿔, 극도로 멍청한 육시럴놈이여!',
-                        buttonText: '진짜 빡세게!',
-                        teeth: 5
-                    },
-                    {
-                        level: 4,
-                        title: '극한맛 🔥',
-                        original: 'Ἄκρον κακόν, γαμώ!',
-                        pronunciation: '아크론 카콘, 가모!',
-                        slap: '극단적인 악이다!',
-                        korean: '와 씨부럴! 니 존재 자체가 중용의 반대여! 하늘도 땅도 버린 극악무도한 놈!',
-                        buttonText: '죽을만큼 때려!',
-                        teeth: '전체'
-                    }
-                ]
-            },
-            {
-                id: 'descartes',
-                name: '데카르트',
-                emoji: '🤔',
-                quote: '나는 생각한다 고로 존재한다',
-                language: '프랑스어',
-                free: true,
-                levels: [
-                    {
-                        level: 1,
-                        title: '순한맛 🌶️',
-                        original: 'Je pense, donc je suis',
-                        pronunciation: '주 팡스, 동크 주 쉬',
-                        slap: '나는 생각한다, 고로 존재한다',
-                        korean: '생각해야 존재한다고, 이 양반아!',
-                        buttonText: '김치싸다구!',
-                        teeth: 1
-                    },
-                    {
-                        level: 2,
-                        title: '중간맛 🌶️🌶️',
-                        original: 'Tu ne penses pas!',
-                        pronunciation: '튀 느 팡스 파!',
-                        slap: '너는 생각을 안 하잖아!',
-                        korean: '아따 이놈아! 니는 생각을 안 하니께 존재도 안 하는 거시기여!',
-                        buttonText: '더 세게!',
-                        teeth: 3
-                    },
-                    {
-                        level: 3,
-                        title: '매운맛 🌶️🌶️🌶️',
-                        original: 'Tu ne penses pas, donc tu n\'es qu\'une merde!',
-                        pronunciation: '튀 느 팡스 파, 동크 튀 네 캉 메흐드!',
-                        slap: '너는 생각 안 하니까 그냥 똥덩어리야!',
-                        korean: '어허! 생각도 안 하는 놈은 말똥구리가 굴리는 똥만도 못한 거시기여!',
-                        buttonText: '진짜 빡세게!',
-                        teeth: 5
-                    },
-                    {
-                        level: 4,
-                        title: '극한맛 🔥',
-                        original: 'Putain de merde sans cerveau!',
-                        pronunciation: '퓌탱 드 메흐드 상 세르보!',
-                        slap: '뇌 없는 똥덩어리 새끼!',
-                        korean: '와 씨부럴! 뇌가 없으니께 생각도 못하고 존재도 못하는 육시럴놈! 파리 목숨만도 못해!',
-                        buttonText: '죽을만큼 때려!',
-                        teeth: '전체'
-                    }
-                ]
-            },
-            {
-                id: 'diogenes',
-                name: '디오게네스',
-                emoji: '🧙‍♂️',
-                quote: '끄지라 이 씨부럴넘아!',
-                language: '고대 그리스어',
-                free: true,
-                levels: [
-                    {
-                        level: 1,
-                        title: '순한맛 🌶️',
-                        original: 'Παραμέρα!',
-                        pronunciation: '파라메라!',
-                        slap: '비켜!',
-                        korean: '끄지라, 이 씨부럴넘아!',
-                        buttonText: '김치싸다구!',
-                        teeth: 1
-                    },
-                    {
-                        level: 2,
-                        title: '중간맛 🌶️🌶️',
-                        original: 'Φύγε από τον ήλιό μου, κύων!',
-                        pronunciation: '피게 아포 톤 일리오 무, 퀴온!',
-                        slap: '내 햇빛에서 꺼져, 개새끼야!',
-                        korean: '아따 이 호로새끼야! 해 가리지 말고 당장 끄져부러! 니가 뭔디 내 햇빛을 가려!',
-                        buttonText: '더 세게!',
-                        teeth: 3
-                    },
-                    {
-                        level: 3,
-                        title: '매운맛 🌶️🌶️🌶️',
-                        original: 'Γαμώ! Εἶ χείρων κυνός!',
-                        pronunciation: '가모! 에이 케이론 퀴노스!',
-                        slap: 'Γαμώ! 너는 개보다 못하다!',
-                        korean: '씨부럴! 개새끼들도 니보다는 낫겄다! 개는 정직하기라도 하제, 니는 뭐냐 이 육시럴놈아!',
-                        buttonText: '진짜 빡세게!',
-                        teeth: 5
-                    },
-                    {
-                        level: 4,
-                        title: '극한맛 🔥',
-                        original: 'Γαμώ! Ἀλέξανδρος > σύ × ∞',
-                        pronunciation: '가모! 알렉산드로스 > 시 × 무한대',
-                        slap: 'Γαμώ! 알렉산더가 너보다 무한대로 낫다!',
-                        korean: '와 씨부럴! 알렉산더가 "나 대신 디오게네스가 되고 싶다" 했는디, 니는? 길바닥 개미 똥구녕만도 못한 놈이여! 천둥번개 맞아 뒤질 놈!',
-                        buttonText: '죽을만큼 때려!',
-                        teeth: '전체'
-                    }
-                ]
-            },
-            {
-                id: 'kant',
-                name: '칸트',
-                emoji: '👨‍⚖️',
-                quote: '정언명령',
-                language: '독일어',
-                free: false,
-                premium: true,
-                levels: [
-                    {
-                        level: 1,
-                        title: '순한맛 🌶️',
-                        original: 'Handle nur nach der Maxime',
-                        pronunciation: '한들레 누어 나흐 데어 막시메',
-                        slap: '너의 격률에 따라 행동하라',
-                        korean: '니 원칙대로 살어, 이 양반아!',
-                        buttonText: '김치싸다구!',
-                        teeth: 1
-                    },
-                    {
-                        level: 2,
-                        title: '중간맛 🌶️🌶️',
-                        original: 'Deine Maxime ist Unsinn!',
-                        pronunciation: '다이네 막시메 이스트 운진!',
-                        slap: '네 원칙은 헛소리다!',
-                        korean: '니 원칙? 그거 개뿔이여! 송장 귀에 경 읽기만도 못한 헛소리당께!',
-                        buttonText: '더 세게!',
-                        teeth: 3
-                    },
-                    {
-                        level: 3,
-                        title: '매운맛 🌶️🌶️🌶️',
-                        original: 'Du bist ein wandelnder Widerspruch!',
-                        pronunciation: '두 비스트 아인 반델른더 비더슈프루흐!',
-                        slap: '너는 걸어다니는 모순이다!',
-                        korean: '이 육시럴놈아! 니는 걸어다니는 거시기여! 앞뒤가 안 맞는 호박에 줄 긋는 놈!',
-                        buttonText: '진짜 빡세게!',
-                        teeth: 5
-                    },
-                    {
-                        level: 4,
-                        title: '극한맛 🔥',
-                        original: 'Kategorischer Imperativ: Verschwinde!',
-                        pronunciation: '카테고리셔 임페라티프: 페어슈빈데!',
-                        slap: '정언명령: 사라져라!',
-                        korean: '절대명령이여! "이놈은 당장 씨가 마르고 삼대가 멸해야 쓰겄다!" 천지신명도 포기한 놈!',
-                        buttonText: '죽을만큼 때려!',
-                        teeth: '전체'
-                    }
-                ]
-            },
-            {
-                id: 'hegel',
-                name: '헤겔',
-                emoji: '🌀',
-                quote: '변증법',
-                language: '독일어',
-                free: false,
-                premium: true,
-                levels: [
-                    {
-                        level: 1,
-                        title: '순한맛 🌶️',
-                        original: 'These, Antithese, Synthese',
-                        pronunciation: '테제, 안티테제, 진테제',
-                        slap: '정, 반, 합',
-                        korean: '정반합이여, 이 양반아!',
-                        buttonText: '김치싸다구!',
-                        teeth: 1
-                    },
-                    {
-                        level: 2,
-                        title: '중간맛 🌶️🌶️',
-                        original: 'Deine Dialektik ist kaputt!',
-                        pronunciation: '다이네 디알렉틱 이스트 카푸트!',
-                        slap: '네 변증법은 망가졌다!',
-                        korean: '니 변증법? 거시기가 꼬였구만! 막걸리 마시고 헛소리하는 주정뱅이만도 못하네!',
-                        buttonText: '더 세게!',
-                        teeth: 3
-                    },
-                    {
-                        level: 3,
-                        title: '매운맛 🌶️🌶️🌶️',
-                        original: 'Der Weltgeist hat dich übersprungen!',
-                        pronunciation: '데어 벨트가이스트 하트 디히 위버슈프룽엔!',
-                        slap: '세계정신이 너를 건너뛰었다!',
-                        korean: '어허 이놈! 세계정신도 니는 "아이고 이놈은 건너뛰자" 했겄다! 조상 대대로 병신 유전자!',
-                        buttonText: '진짜 빡세게!',
-                        teeth: 5
-                    },
-                    {
-                        level: 4,
-                        title: '극한맛 🔥',
-                        original: 'Absolute Negation deiner Existenz!',
-                        pronunciation: '압솔루테 네가치온 다이너 엑시스텐츠!',
-                        slap: '네 존재의 절대적 부정!',
-                        korean: '이 천하의 잡놈아! 니 존재는 판소리로 "어화 세상에, 이런 놈은 태어나지 말았어야 할 것을!" 하늘도 땅도 버린 놈!',
-                        buttonText: '죽을만큼 때려!',
-                        teeth: '전체'
-                    }
-                ]
-            }
+        // GIPHY 싸다구 GIF URL들
+        const slapGifs = [
+            "https://media.giphy.com/media/xT0BKiwgIPGShJNi0g/giphy.gif",
+            "https://media.giphy.com/media/Zau0yrl17uzdK/giphy.gif",
+            "https://media.giphy.com/media/wOXQvz3FwajVm/giphy.gif",
+            "https://media.giphy.com/media/3XlEk2RxPS1m8/giphy.gif",
+            "https://media.giphy.com/media/mEtSQlxqBtWWA/giphy.gif",
+            "https://media.giphy.com/media/j3iGKfXRKlLqw/giphy.gif",
+            "https://media.giphy.com/media/uqSU9IEYEKAbS/giphy.gif",
+            "https://media.giphy.com/media/Ql5voX2wAVUYw/giphy.gif",
+            "https://media.giphy.com/media/RXKCMLmch5W2Q/giphy.gif",
+            "https://media.giphy.com/media/s5zXKfeXaa6ZO/giphy.gif"
         ];
         
-        // 렌더링 함수들
+        // 렌더링 함수
         function render() {
             const app = document.getElementById('app');
-            app.innerHTML = '';
-            
-            const urlParams = new URLSearchParams(window.location.search);
-            const viewId = urlParams.get('view');
-            
-            if (viewId) {
-                renderSharedView(viewId);
-                return;
-            }
             
             switch(state.currentStep) {
                 case 'intro':
                     renderIntro(app);
                     break;
                 case 'target':
-                    renderTargetSelection(app);
-                    break;
-                case 'character':
-                    renderCharacterSelection(app);
-                    break;
-                case 'philosopher':
-                    renderPhilosopherSelection(app);
+                    renderTarget(app);
                     break;
                 case 'slap':
-                    renderSlapScreen(app);
+                    renderSlap(app);
                     break;
-            }
-            
-            if (state.showShareModal) {
-                renderShareModal();
             }
         }
         
@@ -1055,371 +369,140 @@
         function renderIntro(app) {
             app.innerHTML = `
                 <div class="card text-center">
-                    <div class="text-6xl mb-4">💥</div>
-                    <h2 class="text-2xl mb-4"><b>스트레스를 철학으로<br>날려버리세요!</b></h2>
-                    <p class="text-gray mb-6">위대한 철학자들이<br>당신을 대신해 점점 더 세게 김치싸다구를!</p>
-                    
-                    <div class="mb-4" style="height: 300px; width: 100%; max-width: 500px; margin: 0 auto; overflow: hidden; border-radius: 0.5rem; background: #f3f4f6; display: flex; align-items: center; justify-content: center;">
-    <img src="Slap Kimchi GIF by kwaesam.gif" 
-         alt="김치싸다구 미리보기"
-         style="width: 100%; height: auto; object-fit: cover;">
-</div>
+                    <style>
+                        @keyframes shake {
+                            0%, 100% { transform: translateX(0); }
+                            25% { transform: translateX(-5px); }
+                            75% { transform: translateX(5px); }
+                        }
+                    </style>
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <h1 style="
+                            font-size: 4rem;
+                            font-weight: 900;
+                            background: linear-gradient(45deg, #ff6b6b, #ff8787, #ffa8a8);
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: transparent;
+                            background-clip: text;
+                            text-shadow: 3px 3px 10px rgba(255,107,107,0.3);
+                            letter-spacing: -0.05em;
+                            margin: 0;
+                            animation: pulse 2s ease-in-out infinite;
+                        ">김치싸다구</h1>
+                        <div style="
+                            font-size: 2rem;
+                            margin-top: -10px;
+                            animation: shake 2s ease-in-out infinite;
+                        ">🌶️💥</div>
                     </div>
                     
-                   <div class="text-center">
-   <button class="btn" onclick="changeStep('target')" style="display: block; margin: 0 auto;">시작하기</button>
-<div class="mt-4 text-sm text-gray text-center">
-    누적 김치싸다구: ${(12345 + state.slapCount).toLocaleString()}회
-</div>
-</div>
+                    <div class="text-6xl mb-4">💥</div>
+                    <h2 class="text-2xl mb-4"><b>스트레스를 철학으로</b><br>날려버리세요!</h2>
+                    <p class="text-gray mb-6">위대한 철학자들이<br>당신을 대신해 정적 더 세게 김치싸다구를!</p>
+                    
+                    <div class="mb-4" style="height: 300px; width: 100%; max-width: 500px; margin: 0 auto; overflow: hidden; border-radius: 0.5rem; background: #f3f4f6; display: flex; align-items: center; justify-content: center;">
+                        <img src="Slap Kimchi GIF by kwaesam.gif" 
+                             alt="김치싸다구 미리보기"
+                             style="width: 100%; height: auto; object-fit: cover;">
+                    </div>
+                    
+                    <div class="text-center">
+                        <button class="btn" onclick="changeStep('target')">시작하기</button>
+                        <div class="mt-4 text-sm text-gray text-center">
+                            누적 김치싸다구: ${(12345 + state.slapCount).toLocaleString()}회
+                        </div>
+                    </div>
                 </div>
             `;
         }
         
         // 타겟 선택 화면
-        function renderTargetSelection(app) {
+        function renderTarget(app) {
             app.innerHTML = `
                 <div class="card">
                     <h2 class="text-2xl text-center mb-6"><b>누구를 때릴까요?</b></h2>
-                    <div class="target-grid">
-                        ${Object.entries(targets).map(([key, target]) => `
-                            <button class="target-btn ${state.selectedTarget === key ? 'selected' : ''}" 
-                                    onclick="selectTarget('${key}')">
-                                <div class="emoji">${target.emoji}</div>
-                                <div><b>${target.name}</b></div>
-                            </button>
-                        `).join('')}
-                    </div>
-                    ${state.selectedTarget ? `
-                        <div class="input-group">
-                            <input type="text" 
-                                   placeholder="${targets[state.selectedTarget].name} 이름을 입력하세요"
-                                   value="${state.targetName}"
-                                   oninput="updateTargetName(this.value)"
-                                   maxlength="10">
-                        </div>
-                        <button class="btn" style="width: 100%;" onclick="proceedToCharacter()">다음</button>
-                    ` : ''}
-                </div>
-            `;
-        }
-        
-        // 캐릭터 선택 화면 (지역 정보 추가)
-        function renderCharacterSelection(app) {
-            app.innerHTML = `
-                <div class="card">
-                    <h2 class="text-2xl text-center mb-2"><b>비슷한 타입을 골라주세요</b></h2>
-                    <p class="text-gray text-center mb-6">
-                        ${state.targetName}과(와) 비슷한 캐릭터
-                    </p>
-                    <div>
-                        ${characters[state.selectedTarget]?.map((char) => `
-                            <button class="philosopher-item" 
-                                    onclick="selectCharacter('${char.id}')">
-                                <div class="emoji">${char.face}</div>
-                                <div style="flex: 1;">
-                                    <div class="name">
-                                        ${char.name}
-                                        <span class="region-badge">${char.region}</span>
-                                    </div>
-                                    <div class="quote">${char.features.join(' · ')}</div>
-                                    <div style="font-size: 0.75rem; color: #9ca3af; margin-top: 0.25rem;">
-                                        ${char.style}
-                                    </div>
-                                </div>
-                            </button>
-                        `).join('')}
-                    </div>
-                    <button class="text-sm text-gray" onclick="changeStep('target')">← 다시 선택</button>
-                </div>
-            `;
-        }
-        
-        // 철학자 선택 화면
-        function renderPhilosopherSelection(app) {
-            app.innerHTML = `
-                <div class="card">
-                    <h2 class="text-2xl text-center mb-6"><b>어떤 철학자가 때릴까요?</b></h2>
                     
-                    <div class="philosopher-list">
-                        ${philosophers.map(phil => `
-                            <button class="philosopher-item ${phil.free ? '' : 'premium'}" 
-                                    onclick="selectPhilosopher('${phil.id}')">
-                                <span class="emoji">${phil.emoji}</span>
-                                <div style="flex: 1;">
-                                    <div class="name">
-                                        ${phil.name}
-                                        ${!phil.free ? '<span class="premium-badge">PREMIUM</span>' : ''}
-                                    </div>
-                                    <div class="quote">"${phil.quote}"</div>
-                                    <div style="font-size: 0.75rem; color: #9ca3af; margin-top: 0.25rem;">
-                                        ${phil.language} | 4단계 빡침 시스템
-                                    </div>
-                                </div>
-                            </button>
-                        `).join('')}
-                    </div>
-                    
-                    <button class="text-sm text-gray" onclick="changeStep('character')">← 다시 선택</button>
-                </div>
-            `;
-        }
-        
-        // 김치싸다구 화면 (타겟 반응 추가)
-        function renderSlapScreen(app) {
-            const phil = state.selectedPhilosopher;
-            const char = state.selectedCharacter;
-            const charResponse = characterResponses[char.id];
-            const currentLevel = Math.min(state.currentSlapLevel, 4);
-            const levelData = phil.levels[currentLevel - 1] || phil.levels[0];
-            
-            app.innerHTML = `
-                <div class="card text-center">
-                    <div class="mb-4">
-                        <div class="text-6xl mb-2">${phil.emoji}</div>
-                        <h3 class="text-lg"><b>${phil.name}</b></h3>
-                        ${state.showResult ? `
-                            <div class="level-indicator mt-2">
-                                ${levelData.title}
-                            </div>
-                            <div class="anger-meter">
-                                <div class="anger-meter-fill" style="width: ${(currentLevel / 4) * 100}%"></div>
-                            </div>
-                        ` : ''}
-                    </div>
-                    
-                    <div class="text-lg mb-4">
-                        <span class="text-red">${state.targetName}</span>에게
-                    </div>
-                    
-                    ${!state.showResult ? `
-                        ${!state.isSlapping ? `
-                            <div class="text-6xl mb-4">🥬</div>
-                            <button class="btn ${currentLevel > 1 ? 'btn-level-' + currentLevel : ''}" 
-                                    onclick="doSlap()">
-                                ${levelData.buttonText}
-                            </button>
-                        ` : `
-                            <div class="gif-container">
-                                ${state.currentGifUrl ? `
-                                    <img src="${state.currentGifUrl}" 
-                                         alt="김치싸다구!" />
-                                ` : `
-                                    <div class="loading-gif"></div>
-                                    <p class="text-sm text-gray mt-4">김치싸다구 준비중...</p>
-                                `}
-                            </div>
-                            <div class="text-lg text-red animate-pulse">
-                                ${currentLevel === 1 ? '김치싸다구 작렬중...' :
-                                  currentLevel === 2 ? '더 세게 때리는 중...' :
-                                  currentLevel === 3 ? '진짜 빡세게 때리는 중...' :
-                                  '죽을만큼 때리는 중...'}
-                            </div>
-                        `}
-                    ` : `
+                    ${Object.entries(targetCategories).map(([categoryKey, category]) => `
                         <div>
-                            <div class="text-6xl mb-4">💥</div>
-                            
-                            <div class="language-box">
-                                <div class="language-label"><b>${phil.language}</b></div>
-                                <div class="original-text">${levelData.original}</div>
-                                <div class="pronunciation">[${levelData.pronunciation}]</div>
-                                <div class="translation">"${levelData.slap}"</div>
-                                ${levelData.korean ? `
-                                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
-                                        <div class="language-label"><b>전라도 사투리 번역</b></div>
-                                        <div class="translation" style="color: #dc2626;">
-                                            "${levelData.korean}"
-                                        </div>
-                                    </div>
-                                ` : ''}
-                            </div>
-                            
-                            <!-- 타겟의 반응 추가! -->
-                            <div class="target-response-box">
-                                <div class="text-sm text-gray mb-2">
-                                    <b>${char.name}의 반응</b>
-                                    <span class="region-badge">${char.region} 사투리</span>
-                                </div>
-                                <div class="text-lg" style="color: #d97706;">
-                                    "${charResponse.responses[currentLevel - 1]}"
-                                </div>
-                            </div>
-                            
-                            <div class="text-sm text-gray mb-4" style="margin-top: 1rem;">
-                                이빨 ${levelData.teeth === '전체' ? '전체' : levelData.teeth + '개'} 날아감 🦷✨
-                            </div>
-                            
-                            <div style="display: flex; gap: 0.75rem; justify-content: center; margin-bottom: 1rem;">
-                                ${currentLevel < 4 ? `
-                                    <button class="btn btn-level-${currentLevel + 1}" 
-                                            onclick="doSlap()">
-                                        ${phil.levels[currentLevel]?.buttonText || '더 세게!'}
+                            <div class="target-category">${category.name}</div>
+                            <div class="target-grid">
+                                ${Object.entries(category.targets).map(([key, target]) => `
+                                    <button class="target-btn ${state.target === key ? 'selected' : ''}" 
+                                            onclick="selectTarget('${key}', '${target.name}')">
+                                        <span class="emoji">${target.emoji}</span>
+                                        <div><b>${target.name}</b></div>
+                                        <div class="text-sm text-gray">${target.desc}</div>
                                     </button>
-                                ` : `
-                                    <button class="btn btn-secondary" 
-                                            onclick="alert('더 이상은 무리야... 죽을지도 몰라!')">
-                                        더 이상은...
-                                    </button>
-                                `}
-                                <button class="btn btn-success" onclick="shareSlap()">
-                                    공유하기 🚀
-                                </button>
+                                `).join('')}
                             </div>
-                            
-                            <button class="mt-4 text-sm text-gray" onclick="resetApp()">처음으로</button>
                         </div>
-                    `}
+                    `).join('')}
                     
-                    ${state.slapCount > 0 && !state.showResult && !state.isSlapping ? `
-                        <div class="mt-4 text-sm text-gray">
-                            총 ${state.slapCount}대째...
+                    ${state.target ? `
+                        <div class="mt-4">
+                            <input type="text" 
+                                   class="name-input"
+                                   placeholder="${state.target === 'custom' ? '직접 입력' : state.targetType + ' 이름을 입력하세요'}"
+                                   value="${state.targetName}"
+                                   onchange="updateTargetName(this.value)"
+                                   maxlength="10">
+                            <button class="btn" style="width: 100%;" 
+                                    onclick="proceedToSlap()">
+                                김치싸다구 날리기!
+                            </button>
                         </div>
                     ` : ''}
                 </div>
             `;
         }
         
-        // 공유된 뷰 렌더링
-        function renderSharedView(shareId) {
-            const app = document.getElementById('app');
-            const shareDataStr = localStorage.getItem(shareId);
-            
-            if (!shareDataStr) {
-                app.innerHTML = `
-                    <div class="card text-center">
-                        <div class="text-2xl mb-4">😅</div>
-                        <h2 class="text-lg mb-4"><b>김치싸다구가 만료되었습니다!</b></h2>
-                        <p class="text-gray mb-6">이미 날아간 김치싸다구예요.</p>
-                        <button class="btn" onclick="resetApp()">새로운 김치싸다구 날리기</button>
-                    </div>
-                `;
-                return;
-            }
-            
-            const shareData = JSON.parse(shareDataStr);
-            const charResponse = characterResponses[shareData.character.id];
+        // 김치싸다구 화면
+        function renderSlap(app) {
+            const randomGif = slapGifs[Math.floor(Math.random() * slapGifs.length)];
+            const insult = getInsultByCombo();
             
             app.innerHTML = `
-                <div class="card">
-                    <div class="text-center mb-4">
-                        <h2 class="text-2xl mb-2"><b>${shareData.target}님께 날아온 김치싸다구!</b></h2>
-                        <p class="text-gray">${shareData.philosopher.name}님이 보낸 메시지</p>
-                        <div class="level-indicator mt-2">${shareData.levelTitle}</div>
-                    </div>
+                <div class="card slap-result">
+                    <h2 class="text-2xl mb-4"><b>김치싸다구!</b></h2>
+                    <p class="text-lg mb-4">"${state.targetName || '그놈'}" 에게</p>
                     
-                    ${shareData.gifUrl ? `
-                        <div class="gif-container mb-4">
-                            <img src="${shareData.gifUrl}" alt="김치싸다구!" />
-                        </div>
-                    ` : `
-                        <div class="text-6xl text-center mb-4">💥</div>
-                    `}
-                    
-                    <div class="language-box">
-                        <div class="language-label"><b>${shareData.philosopher.language}</b></div>
-                        <div class="original-text">${shareData.original}</div>
-                        <div class="pronunciation">[${shareData.pronunciation}]</div>
-                        <div class="translation">"${shareData.slap}"</div>
-                        ${shareData.korean ? `
-                            <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
-                                <div class="language-label"><b>전라도 사투리 번역</b></div>
-                                <div class="translation" style="color: #dc2626;">
-                                    "${shareData.korean}"
-                                </div>
-                            </div>
-                        ` : ''}
-                    </div>
-                    
-                    ${shareData.targetResponse ? `
-                        <div class="target-response-box">
-                            <div class="text-sm text-gray mb-2">
-                                <b>${shareData.character.name}의 반응</b>
-                                <span class="region-badge">${shareData.character.region} 사투리</span>
-                            </div>
-                            <div class="text-lg" style="color: #d97706;">
-                                "${shareData.targetResponse}"
-                            </div>
+                    ${state.comboCount > 0 ? `
+                        <div class="combo-display animate-shake">
+                            🔥 ${state.comboCount} COMBO!
                         </div>
                     ` : ''}
                     
-                    <div class="text-center mt-4">
-                        <button class="btn" onclick="resetApp()">나도 김치싸다구 날리기!</button>
-                    </div>
-                </div>
-            `;
-            
-            setTimeout(() => {
-                localStorage.removeItem(shareId);
-            }, 5000);
-        }
-        
-        // 공유 모달
-        function renderShareModal() {
-            const phil = state.selectedPhilosopher;
-            const char = state.selectedCharacter;
-            const charResponse = characterResponses[char.id];
-            const currentLevel = Math.min(state.currentSlapLevel, 4);
-            const levelData = phil.levels[currentLevel - 1];
-            
-            const modalDiv = document.createElement('div');
-            modalDiv.className = 'modal';
-            modalDiv.innerHTML = `
-                <div class="modal-content">
-                    <h3 class="text-lg mb-4"><b>김치싸다구 공유하기</b></h3>
+                    <img src="${randomGif}" 
+                         alt="싸다구!" 
+                         class="slap-gif">
                     
-                    <div class="share-preview">
-                        <div class="share-preview-title">공유 링크가 생성되었습니다!</div>
-                        <div class="text-sm text-gray mt-2">
-                            ${levelData.title} 김치싸다구를 공유하세요!
-                        </div>
-                    </div>
-                    
-                    <div class="share-text">
-${phil.name}이(가) ${state.targetName}에게:
-
-[${levelData.title}]
-[${phil.language}]
-${levelData.original}
-[${levelData.pronunciation}]
-
-"${levelData.slap}"
-${levelData.korean ? `\n전라도 사투리: "${levelData.korean}"` : ''}
-
-${char.name}의 반응 (${char.region} 사투리):
-"${charResponse.responses[currentLevel - 1]}"
-
-김치싸다구 ${state.slapCount}대째! 🌶️💥
-
-👇 링크 클릭시 김치싸다구 재생!
-${state.shareLink}
+                    <div class="insult-text">
+                        "${insult}"
                     </div>
                     
                     <p class="text-sm text-gray mb-4">
-                        위 내용을 전체 선택해서 복사하세요!
+                        총 ${state.slapCount}대째 때리는 중!
                     </p>
                     
-                    <button class="btn" style="width: 100%;" onclick="closeShareModal()">닫기</button>
+                    <div class="flex gap-4 justify-center">
+                        <button class="btn" onclick="continueSlap()">더 때리기</button>
+                        <button class="btn btn-secondary" onclick="shareResult()">공유하기</button>
+                    </div>
+                    
+                    <button class="mt-4 text-sm text-gray" onclick="resetToStart()">처음으로</button>
                 </div>
             `;
-            document.body.appendChild(modalDiv);
         }
         
-        // 랜덤 GIF 선택 함수
-        function getRandomSlapGif(level) {
-            const gifPool = SLAP_GIFS_BY_LEVEL[level] || SLAP_GIFS_BY_LEVEL[1];
-            const randomIndex = Math.floor(Math.random() * gifPool.length);
-            return gifPool[randomIndex];
-        }
-        
-        // 상태 변경 함수들
+        // 액션 함수들
         function changeStep(step) {
             state.currentStep = step;
             render();
         }
         
-        function selectTarget(target) {
-            state.selectedTarget = target;
+        function selectTarget(targetKey, targetType) {
+            state.target = targetKey;
+            state.targetType = targetType;
             render();
         }
         
@@ -1427,121 +510,89 @@ ${state.shareLink}
             state.targetName = name;
         }
         
-        function proceedToCharacter() {
+        function proceedToSlap() {
             if (!state.targetName.trim()) {
                 alert('이름을 입력해주세요!');
                 return;
             }
-            changeStep('character');
-        }
-        
-        function selectCharacter(charId) {
-            const char = characters[state.selectedTarget].find(c => c.id === charId);
-            state.selectedCharacter = char;
-            changeStep('philosopher');
-        }
-        
-        function selectPhilosopher(id) {
-            const phil = philosophers.find(p => p.id === id);
-            if (phil.free) {
-                state.selectedPhilosopher = phil;
-                state.currentSlapLevel = 0;
-                changeStep('slap');
+            
+            // 콤보 체크
+            const now = Date.now();
+            if (now - state.lastSlapTime < 3000) {
+                state.comboCount++;
             } else {
-                alert('프리미엄 철학자입니다! 🌟\n\n곧 오픈 예정!');
+                state.comboCount = 0;
+            }
+            state.lastSlapTime = now;
+            
+            state.slapCount++;
+            localStorage.setItem('slapCount', state.slapCount);
+            changeStep('slap');
+        }
+        
+        function continueSlap() {
+            proceedToSlap();
+        }
+        
+        function getInsultByCombo() {
+            let insults;
+            if (state.comboCount >= 10) {
+                insults = philosopherInsults.level3;
+            } else if (state.comboCount >= 5) {
+                insults = philosopherInsults.level2;
+            } else {
+                insults = philosopherInsults.level1;
+            }
+            return insults[Math.floor(Math.random() * insults.length)];
+        }
+        
+        function resetToStart() {
+            state.currentStep = 'intro';
+            state.target = null;
+            state.targetType = '';
+            state.targetName = '';
+            state.comboCount = 0;
+            render();
+        }
+        
+        function shareResult() {
+            const shareText = `김치싸다구 ${state.slapCount}대째!
+"${state.targetName}"에게: "${getInsultByCombo()}"
+${state.comboCount > 0 ? `🔥 ${state.comboCount} COMBO!` : ''}
+
+#김치싸다구 #스트레스해소 #철학자의분노
+https://habonggil.github.io/kimchi-slap/`;
+            
+            // 모바일 공유 API
+            if (navigator.share) {
+                navigator.share({
+                    title: '김치싸다구',
+                    text: shareText,
+                    url: 'https://habonggil.github.io/kimchi-slap/'
+                }).catch(err => {
+                    // 공유 취소시 무시
+                });
+            } else {
+                // PC: 클립보드 복사
+                navigator.clipboard.writeText(shareText).then(() => {
+                    alert('공유 텍스트가 복사되었습니다!\n카톡이나 SNS에 붙여넣기 하세요!');
+                }).catch(() => {
+                    // 구형 브라우저 대응
+                    const textarea = document.createElement('textarea');
+                    textarea.value = shareText;
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textarea);
+                    alert('공유 텍스트가 복사되었습니다!');
+                });
             }
         }
         
-        async function doSlap() {
-            state.isSlapping = true;
-            state.showResult = false;
-            state.slapCount++;
-            state.currentSlapLevel = Math.min(state.currentSlapLevel + 1, 4);
-            
-            // 레벨에 맞는 GIF 선택
-            state.currentGifUrl = getRandomSlapGif(state.currentSlapLevel);
-            
-            render();
-            
-            // GIF 재생 후 결과 표시
-            setTimeout(() => {
-                state.isSlapping = false;
-                state.showResult = true;
-                render();
-            }, 2500);
-        }
-        
-        function generateShareId() {
-            return 'slap_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-        }
-        
-        function generateShareLink() {
-            const shareId = generateShareId();
-            state.shareId = shareId;
-            
-            const phil = state.selectedPhilosopher;
-            const char = state.selectedCharacter;
-            const charResponse = characterResponses[char.id];
-            const currentLevel = Math.min(state.currentSlapLevel, 4);
-            const levelData = phil.levels[currentLevel - 1];
-            
-            const shareData = {
-                id: shareId,
-                target: state.targetName,
-                character: char,
-                philosopher: phil,
-                levelTitle: levelData.title,
-                original: levelData.original,
-                pronunciation: levelData.pronunciation,
-                slap: levelData.slap,
-                korean: levelData.korean,
-                targetResponse: charResponse.responses[currentLevel - 1],
-                gifUrl: state.currentGifUrl,
-                timestamp: Date.now()
-            };
-            
-            localStorage.setItem(shareId, JSON.stringify(shareData));
-            
-            return `${window.location.origin}${window.location.pathname}?view=${shareId}`;
-        }
-        
-        function shareSlap() {
-            state.shareLink = generateShareLink();
-            state.showShareModal = true;
-            render();
-        }
-        
-        function closeShareModal() {
-            state.showShareModal = false;
-            document.querySelector('.modal').remove();
-        }
-        
-        function resetApp() {
-            window.history.replaceState({}, document.title, window.location.pathname);
-            
-            state = {
-                currentStep: 'intro',
-                selectedTarget: '',
-                targetName: '',
-                selectedCharacter: null,
-                selectedPhilosopher: null,
-                slapCount: state.slapCount,
-                currentSlapLevel: 0,
-                isSlapping: false,
-                showResult: false,
-                showShareModal: false,
-                shareId: null,
-                currentGifUrl: ''
-            };
-            render();
-        }
-        
         // 초기화
-        window.onload = function() {
+        document.addEventListener('DOMContentLoaded', () => {
             render();
-            console.log('김치싸다구 준비 완료! 🌶️');
-            console.log('지역별 사투리 욕배틀 시스템 활성화!');
-        };
+        });
     </script>
 </body>
 </html>
